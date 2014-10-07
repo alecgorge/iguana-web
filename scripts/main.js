@@ -1,3 +1,3 @@
 $(function() {
-  $('#myModal').modal();
+  $('#sign-in-modal').modal();
 });

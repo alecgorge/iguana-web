@@ -37,7 +37,7 @@
           <div class="tab-content">
             <div class="tab-pane active" id="sign-in">
               <div class="modal-body">
-                <form role="form">
+                <form role="form" method="get" action="/loggedin.html">
                   <div class="form-group">
                     <label for="sign-in-email">Email address</label>
                     <input type="email" class="form-control" id="sign-in-email" placeholder="Enter email">
@@ -51,7 +51,7 @@
                       <input type="checkbox" checked="checked"> Remember Me
                     </label>
                   </div>
-                  <button type="sumbit" class="btn btn-primary btn-block" data-dismiss="modal">Sign in</button>
+                  <button type="sumbit" id="magic" class="btn btn-primary btn-block" data-dismiss="modal">Sign in</button>
                 </form>
               </div>
             </div> <!-- end #sign-in -->
@@ -71,7 +71,7 @@
                     <label for="create-account-password">Password</label>
                     <input type="password" class="form-control" id="create-account-password" placeholder="Password">
                   </div>
-                  <button type="sumbit" class="btn btn-primary btn-block" data-dismiss="modal">Create account</button>
+                  <button type="sumbit" id="magic2" class="btn btn-primary btn-block" data-dismiss="modal">Create account</button>
                 </form>
               </div>
             </div> <!-- end #create-account -->

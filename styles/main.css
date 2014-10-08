@@ -1,3 +1,21 @@
 body {
   background-image: url('/images/background.png');
 }
+
+.fas {
+  width: 700px;
+  text-align: center;
+  margin: 0 auto;
+  padding-top: 250px;
+}
+
+.fa {
+  font-size: 5em;
+  margin: 0 30px;
+}
+
+.hello {
+  float: right;
+  background-color: white;
+  font-size: 2em;
+}

@@ -2,7 +2,6 @@ $(function() {
   $('#sign-in-modal').modal();
 });
 
-
 $('#magic').click(function() {
   console.log("hi");
   window.location = '/loggedin.html';
@@ -19,7 +18,7 @@ var first = true;
 
 $('#play').click(function() {
   if(first) {
-    audio = new Audio('/music.mp3');
+    audio = new Audio('/test.mp3');
     first = false;
   }
   audio.play();

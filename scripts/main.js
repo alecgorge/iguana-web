@@ -39,3 +39,4 @@ $('#fast-forward').click(function() {
 $('#fast-backward').click(function() {
   audio.pause();
 });
+

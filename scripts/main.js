@@ -16,27 +16,27 @@ $('#magic2').click(function() {
 var audio;
 var first = true;
 
-$('#play').click(function() {
-  if(first) {
-    audio = new Audio('/test.mp3');
-    first = false;
-  }
-  audio.play();
-  $('#pause').toggle();
-  $('#play').toggle();
-});
+// $('#play').click(function() {
+//   if(first) {
+//     audio = new Audio('/test.mp3');
+//     first = false;
+//   }
+//   audio.play();
+//   $('#pause').toggle();
+//   $('#play').toggle();
+// });
+//
+// $('#pause').click(function() {
+//   $('#pause').toggle();
+//   $('#play').toggle();
+//   audio.pause();
+// });
 
-$('#pause').click(function() {
-  $('#pause').toggle();
-  $('#play').toggle();
-  audio.pause();
-});
-
-$('#fast-forward').click(function() {
-  audio.pause();
-});
-
-$('#fast-backward').click(function() {
-  audio.pause();
-});
-
+// $('#fast-forward').click(function() {
+//   audio.pause();
+// });
+//
+// $('#fast-backward').click(function() {
+//   audio.pause();
+// });
+//

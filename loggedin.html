@@ -83,15 +83,36 @@
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="width: 9%;"></div>
         </div>
+
+        <audio media-player="audio1" data-playlist="playlist1">
+          <source src="http://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" type="audio/ogg">
+        </audio>
+        <span ng-show="audio1.playing">Player status: Playing</span>
+        <span ng-show="!audio1.playing">Player status: Paused</span>
+
         <div class="player-song-times">
-          <div class="player-song-current-time">0:20</div>
+          <div class="player-song-current-time">{{current_time}}</div>
           <div class="player-song-total-time">{{total_time}}</div>
         </div>
         <div class="fas">
           <i class="fa-fast-backward fa player-fa" id="fast-forward"></i>
-          <i class="fa-play fa player-fa" id="play"></i>
+          <i class="fa-play fa player-fa" id="play" ng-click="morePlay()"></i>
           <i class="fa-pause fa player-fa" id="pause" style="display:none"></i>
-          <i class="fa-fast-forward fa player-fa" id="fast-backward"></i>
+          <i class="fa-fast-forward fa player-fa" id="fast-backward" ng-click="nextSong()"></i>
+        </div>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1412777015670060&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+
+        <div class="share">
+          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
         </div>
       </div>
     </div>
@@ -101,6 +122,7 @@
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-resource.min.js"></script>
+    <script src="scripts/angular-media-player.min.js"></script>
     <script src="scripts/root.js"></script>
     <script src="scripts/controllers.js"></script>
     <script src="scripts/services.js"></script>

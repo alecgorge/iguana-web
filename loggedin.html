@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body>
+  <body ng-controller="index">
 
     <div class="sidebar sidebar-left">
       <div class="sidebar-logo"></div>
@@ -50,7 +50,7 @@
       </ul>
     </div>
 
-    <div class="content" ng-controller="index">
+    <div class="content">
       <div class="row">
           <ul class="list-group artist-list">
             <li class="list-group-item list-group-header active">Artists</li>
@@ -59,17 +59,17 @@
 
           <ul class="list-group year-list">
             <li class="list-group-item list-group-header active">Years</li>
-            <a href="#" ng-repeat="year in years" ng-click="getShows(1, 1995)"><li class="list-group-item">{{year.year}}</li></a>
+            <a href="#" ng-repeat="year in years" ng-click="getShows(year)"><li class="list-group-item">{{year.year}}</li></a>
           </ul>
 
           <ul class="list-group show-list">
             <li class="list-group-item list-group-header active">Shows</li>
-            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(1, 1995, '1995-01-01')"><li class="list-group-item">{{show.title}}</li></a>
+            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(show)"><li class="list-group-item">{{show.title}}</li></a>
           </ul>
 
           <ul class="list-group recording-list">
             <li class="list-group-item list-group-header active">Recordings</li>
-            <a href="#" ng-repeat="recording in recordings" ng-click="playSong()"><li class="list-group-item">{{recording.title}}</li></a>
+            <a href="#" ng-repeat="recording in recordings" ng-click="playSong(recording)"><li class="list-group-item">{{recording.title}}</li></a>
           </ul>
 
       </div>
@@ -78,14 +78,14 @@
     <div class="sidebar sidebar-right">
       <div class="player">
         <img class="player-song-album-art" src="/images/album-art.jpg">
-        <div class="player-song-title">In the Bliss</div>
-        <div class="player-song-artist">Lotus</div>
+        <div class="player-song-title">{{title}}</div>
+        <div class="player-song-artist">{{artist}}</div>
         <div class="progress">
           <div class="progress-bar" role="progressbar" style="width: 9%;"></div>
         </div>
         <div class="player-song-times">
           <div class="player-song-current-time">0:20</div>
-          <div class="player-song-total-time">3:44</div>
+          <div class="player-song-total-time">{{total_time}}</div>
         </div>
         <div class="fas">
           <i class="fa-fast-backward fa player-fa" id="fast-forward"></i>

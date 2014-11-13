@@ -83,7 +83,7 @@ a, a:hover {
   z-index: 100;
   content: "";
   position: absolute;
-  left: 258px;
+  left: 275px;
   height: 100%;
   top: 0;
   width: 4px;

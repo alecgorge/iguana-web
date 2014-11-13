@@ -68,28 +68,6 @@ a, a:hover {
   color: #dfe0e6;
 }
 
-.artist-list:before {
-  z-index: 100;
-  content: "";
-  position: absolute;
-  left: -15px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
-}
-
-.year-list:before {
-  z-index: 100;
-  content: "";
-  position: absolute;
-  left: 258px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
-}
-
 .content {
   margin-left: 105px;
   margin-right: 250px;
@@ -123,6 +101,69 @@ a, a:hover {
 
 .year-list, .year-list .list-group-header {
   width: 150px;
+}
+
+.show-list, .show-list .list-group-header {
+  width: 250px;
+}
+
+.recording-list, .recording-list .list-group-header {
+  width: 250px;
+}
+
+.artist-list:before {
+  z-index: 100;
+  content: "";
+  position: absolute;
+  left: -15px;
+  height: 100%;
+  top: 0;
+  width: 4px;
+  background-color: #dfe0e6;
+}
+
+.year-list:before {
+  z-index: 100;
+  content: "";
+  position: absolute;
+  left: 258px;
+  height: 100%;
+  top: 0;
+  width: 4px;
+  background-color: #dfe0e6;
+}
+
+.show-list:before {
+  z-index: 100;
+  content: "";
+  position: absolute;
+  left: 408px;
+  height: 100%;
+  top: 0;
+  width: 4px;
+  background-color: #dfe0e6;
+}
+
+.recording-list:before {
+  z-index: 100;
+  content: "";
+  position: absolute;
+  left: 658px;
+  height: 100%;
+  top: 0;
+  width: 4px;
+  background-color: #dfe0e6;
+}
+
+.recording-list:after {
+  z-index: 100;
+  content: "";
+  position: absolute;
+  left: 908px;
+  height: 100%;
+  top: 0;
+  width: 4px;
+  background-color: #dfe0e6;
 }
 
 .list-group-item {

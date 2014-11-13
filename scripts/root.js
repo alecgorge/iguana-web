@@ -1,11 +1,12 @@
-var root = angular.module('root', ["services"])
+var root = angular.module('root', ["ngResource", "services"])
 
-.controller("index", ["$scope", "Artist", "Year", function ($scope, Artist, Year) {
-  $scope.artists = Artist.all();
+.controller("index", ["$scope", "$resource", "Artist", "Year", function ($scope, $resource, Artist, Year) {
+  var artists = $resource("http://localhost:9000/api/artists").get();
+
+  artists.$promise.then(function(result) {
+    $scope.artists = result.data;
+  });
+
   $scope.years = Year.all();
 }]);
 
-
-// $.get("http://localhost:9000/api/artists", function(data) {
-//   console.log(data);
-// });

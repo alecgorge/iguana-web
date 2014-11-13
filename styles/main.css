@@ -75,7 +75,7 @@ a, a:hover {
   left: -15px;
   height: 100%;
   top: 0;
-  width: 3px;
+  width: 4px;
   background-color: #dfe0e6;
 }
 
@@ -94,6 +94,8 @@ a, a:hover {
   margin-left: 105px;
   margin-right: 250px;
   position: fixed;
+  top: 0;
+  bottom: 0;
 }
 
 .container-fluid, .row, .col-lg-4 {

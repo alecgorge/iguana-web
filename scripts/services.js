@@ -1,15 +1,31 @@
-// angular.module('root.services', [])
-//
-// .factory('Updates', function() {
-//   var updates = [
-//     { id: 0, header: 'Cookies!!', subheader: 'Come to the food bar for some dope ass cookies courtesy of Apple!' },
-//     { id: 1, header: 'Check-in', subheader: 'Checkin is going on right now' },
-//     { id: 2, header: 'Check-in', subheader: 'Checkin is going on right now' }
-//   ];
-//
-//   return {
-//     all: function() {
-//       return updates;
-//     }
-//   }
-// })
+angular.module('services', [])
+
+.factory('Artist', function() {
+  var artists = [
+    {id: 0, name: 'Test0'},
+    {id: 1, name: 'Test1'},
+    {id: 2, name: 'Test2'}
+  ];
+
+  return {
+    all: function() {
+      return artists;
+    }
+  }
+})
+
+.factory('Year', function() {
+  var years = [
+    "1950",
+    "1951",
+    "1953",
+    "1957",
+    "1980"
+  ];
+
+  return {
+    all: function() {
+      return years;
+    }
+  }
+});

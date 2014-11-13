@@ -54,12 +54,22 @@
       <div class="row">
           <ul class="list-group artist-list">
             <li class="list-group-item list-group-header active">Artists</li>
-            <a href="#" ng-repeat="artist in artists"><li class="list-group-item">{{artist.name}}</li></a>
+            <a href="#" ng-repeat="artist in artists" ng-click="getYears(artist)"><li class="list-group-item">{{artist.name}}</li></a>
           </ul>
 
           <ul class="list-group year-list">
-            <li class="list-group-item list-group-header active">Year</li>
-            <a href="#" ng-repeat="year in years"><li class="list-group-item">{{year}}</li></a>
+            <li class="list-group-item list-group-header active">Years</li>
+            <a href="#" ng-repeat="year in years" ng-click="getShows(1, 1995)"><li class="list-group-item">{{year.year}}</li></a>
+          </ul>
+
+          <ul class="list-group show-list">
+            <li class="list-group-item list-group-header active">Shows</li>
+            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(1, 1995, '1995-01-01')"><li class="list-group-item">{{show.title}}</li></a>
+          </ul>
+
+          <ul class="list-group recording-list">
+            <li class="list-group-item list-group-header active">Recordings</li>
+            <a href="#" ng-repeat="recording in recordings" ng-click="playSong()"><li class="list-group-item">{{recording.title}}</li></a>
           </ul>
 
       </div>

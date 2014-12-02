@@ -8,6 +8,7 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
 
   var current_artist;
   var current_year;
+  var total_time_seconds;
 
   artists.get().$promise.then(function(result) {
     $scope.artists = result.data;
@@ -36,42 +37,41 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.playSong = function(recording) {
     $scope.title = recording.title;
     $scope.artist = current_artist.name;
+    total_time_seconds = recording.length;
+
+    console.log(recording.file);
+
+    $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, true]);
+
+    $scope.audio1.playPause();
 
     var length = recording.length;
     var min = Math.floor(length/60);
     var sec = pad(length % 60, 2);
     $scope.total_time = min + ':' + sec;
+    $scope.current_time = '0:00';
   };
 
-  $scope.morePlay = function() {
-    console.log("More play");
-    $scope.audio1.playPause();
+  $scope.$watch("audio1.currentTime", function (newValue) {
+    if(newValue) {
+      var min = Math.floor(newValue/60);
+      var sec = pad(Math.floor(newValue) % 60, 2);
+      $scope.current_time = min + ':' + sec;
+    } else {
+      $scope.current_time = '';
+    }
 
-    var length = Math.floor($scope.audio1.currentTime);
-    var min = Math.floor(length/60);
-    var sec = pad(length % 60, 2);
-    $scope.current_time = min + ':' + sec;
-  };
+    $scope.current_time_percentage = newValue / total_time_seconds * 100 + '%';
+  });
 
   $scope.nextSong = function() {
     console.log("nexter");
     $scope.audio1.next();
   };
 
-  $scope.audioPlaylist = [
-    {
-      "src": "http://upload.wikimedia.org/wikipedia/en/0/0c/Wiz_Khalifa_-_Black_and_Yellow.ogg",
-      "type": "audio/ogg"
-    },
-    {
-      "src": "http://upload.wikimedia.org/wikipedia/en/7/79/Korn_-_Predictable_%28demo%29.ogg",
-      "type": "audio/ogg"
-    },
-    {
-      "src": "http://demos.w3avenue.com/html5-unleashed-tips-tricks-and-techniques/demo-audio.ogg",
-      "type": "audio/ogg"
-    }
-  ];
+  $scope.playButton = function() {
+    $scope.audio1.playPause();
+  }
 
 }]);
 

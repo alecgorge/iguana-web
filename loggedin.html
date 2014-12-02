@@ -81,24 +81,22 @@
         <div class="player-song-title">{{title}}</div>
         <div class="player-song-artist">{{artist}}</div>
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 9%;"></div>
+          <div class="progress-bar" role="progressbar" ng-style="{width: current_time_percentage}"></div>
         </div>
 
         <audio media-player="audio1" data-playlist="playlist1">
-          <source src="http://upload.wikimedia.org/wikipedia/en/d/d0/Rick_Astley_-_Never_Gonna_Give_You_Up.ogg" type="audio/ogg">
+          <source src="" id="audio1-src" type="audio/ogg">
         </audio>
-        <span ng-show="audio1.playing">Player status: Playing</span>
-        <span ng-show="!audio1.playing">Player status: Paused</span>
 
         <div class="player-song-times">
           <div class="player-song-current-time">{{current_time}}</div>
           <div class="player-song-total-time">{{total_time}}</div>
         </div>
         <div class="fas">
-          <i class="fa-fast-backward fa player-fa" id="fast-forward"></i>
-          <i class="fa-play fa player-fa" id="play" ng-click="morePlay()"></i>
-          <i class="fa-pause fa player-fa" id="pause" style="display:none"></i>
-          <i class="fa-fast-forward fa player-fa" id="fast-backward" ng-click="nextSong()"></i>
+          <i class="fa-fast-backward fa player-fa" id="fast-backward"></i>
+          <i class="fa-play fa player-fa" id="play" ng-show="!audio1.playing" ng-click="playButton()"></i>
+          <i class="fa-pause fa player-fa" id="pause" ng-show="audio1.playing" ng-click="playButton()"></i>
+          <i class="fa-fast-forward fa player-fa" id="fast-forward"></i>
         </div>
 
         <div id="fb-root"></div>

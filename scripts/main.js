@@ -13,9 +13,9 @@ $('#magic2').click(function() {
   window.location = '/loggedin.html';
 });
 
-var audio;
-var first = true;
-
+// var audio;
+// var first = true;
+//
 // $('#play').click(function() {
 //   if(first) {
 //     audio = new Audio('/test.mp3');
@@ -31,12 +31,15 @@ var first = true;
 //   $('#play').toggle();
 //   audio.pause();
 // });
-
+//
 // $('#fast-forward').click(function() {
 //   audio.pause();
+//   audio = new Audio('/music.mp3');
+//   audio.play();
 // });
 //
 // $('#fast-backward').click(function() {
 //   audio.pause();
+//   audio = new Audio('/test.mp3');
+//   audio.play();
 // });
-//

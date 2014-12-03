@@ -297,6 +297,10 @@ body {
   margin-bottom: 50px;
 }
 
+.artist-list .list-group-item {
+  padding-left: 25px;
+}
+
 .artist-list, .artist-list .list-group-header {
   width: 290px;
 }

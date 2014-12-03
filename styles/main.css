@@ -4,111 +4,315 @@
 }
 
 body {
-  background-color: #000;
-  color: #dfe0e6;
+  color: #1c1c1f;
+  font-family: 'Open Sans', sans-serif;
 }
 
-a, a:hover {
-  color: #dfe0e6;
+.row {
+  margin: 0 !important;
 }
 
-.sidebar {
-  background-color: #1c1c1f;
-  position: fixed;
+.header {
+  position: absolute;
   top: 0;
+  height: 60px;
+  width: 100%;
+}
+
+.header-logo-img {
+  float: left;
+  height: 50px;
+  margin: 5px 0 0 25px;
+}
+
+.header-logo-text {
+  float: left;
+  margin-top: 17px;
+  margin-left: 10px;
+  font-size: 1.2em;
+}
+
+.header-artist-wrapper {
+  margin: 5px 25px;
+  border-left: 1px solid rgba(0, 0, 0, .25);
+  height: 50px;
+  box-sizing: border-box;
+}
+
+.header-artist {
+  position: relative;
+  top: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, .75);
+}
+
+.player-hero {
+  color: #FFF;
+  margin-top: 60px;
+  padding-top: 20px;
+  height: 150px;
+  background-image: url('../images/sunset-bg.png');
+  background-size: cover;
+  background-position: 0 180px;
+  position: relative;
+}
+
+.player-hero-song {
+  font-size: 1.7em;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+
+.player-hero-venue {
+  font-weight: bold;
+}
+
+.player {
+  text-align: center;
+  background-color: rgba(0, 0, 0, .25);
+  height: 50px;
+  width: 100%;
+  position: absolute;
   bottom: 0;
 }
 
-.sidebar-bottom {
-  position: fixed;
-  bottom: 0;
-}
-
-.sidebar-left {
-  width: 90px;
-  left: 0;
-}
-
-.sidebar-logo {
-  background-color: #9A959E;
-  height: 90px;
-}
-
-.sidebar-right {
+.player-main-controls-wrapper {
+  float: left;
   width: 250px;
+  padding-top: 15px;
+}
+
+.player-main-controls {
+  width: 195px;
+  margin: 0 auto;
+}
+
+.player-fa {
+  float: left;
+  margin: 0 20px;
+  width: 25px;
+  height: 25px;
+}
+
+.player-fa-circle-play {
+  margin-top: -2px;
+  font-size: .9em;
+  border-radius: 50%;
+  padding-top: 3px;
+  padding-left: 4px;
+  border: 1px solid #FFF;
+}
+
+.player-fa-circle-pause {
+  margin-top: -2px;
+  font-size: .9em;
+  border-radius: 50%;
+  padding-top: 3px;
+  padding-left: 2px;
+  border: 1px solid #FFF;
+}
+
+.player-progress {
+  margin-top: 17px;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin-left: 0 !important;
+}
+
+.player-progress-bar {
+  margin-top: 7px;
+  background-color: #FFF;
+  height: 2px;
+  width: 90%;
+}
+
+.player-progress-bar-filled {
+  margin-top: -3px;
+  background-color: #FFF;
+  height: 4px;
+  width: 230px;
+}
+
+.player-progress-bar-knob {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background-color: #FFF;
+  border-radius: 50%;
+  left: 500px;
+  top: 19px;
+}
+
+.player-time {
+  position: absolute;
+  right: 275px;
+  top: 15px;
+}
+
+.player-secondary-controls {
+  margin-top: 17px;
+  float: left;
+  width: 250px;
+  padding: 0 25px;
+}
+
+.fa-volume-up {
+  float: left;
+}
+
+.volume-bar {
+  margin-top: 6px;
+  margin-left: 10px;
+  float: left;
+  width: 170px;
+  height: 2px;
+  background-color: #FFF;
+}
+
+.volume-bar-filled {
+  margin-left: 23px;
+  margin-top: 5px;
+  background-color: #FFF;
+  height: 4px;
+  width: 120px;
+}
+
+.volume-bar-knob {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  background-color: #FFF;
+  border-radius: 50%;
+  left: 1350px;
+  top: 18px;
+}
+
+.left-sidebar {
+  position: absolute;
+  background-color: #F1F2F4;
+  width: 250px;
+  left: 0;
+  top: 210px;
+  bottom: 0;
+  border-right: 1px solid rgba(0, 0, 0, .25);
+  padding: 25px;
+}
+
+.menu-header {
+  position: relative;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.menu-list {
+  margin-top: 15px;
+}
+
+.menu-list ul {
+  list-style-type: none;
+}
+
+.menu-list ul li{
+  font-size: .9em;
+  margin: 15px 0;
+}
+
+/* this is wrong, but looks okay */
+.playlists {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  height: 300px;
+  padding-right: 50px;
+}
+
+.playlists-header {
+  position: relative;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.playlists-list {
+  margin-top: 15px;
+}
+
+.playlists-list ul {
+  list-style-type: none;
+}
+
+.playlists-list ul li{
+  font-size: .9em;
+  margin: 15px 0;
+}
+
+.fa-plus-circle {
+  margin-top: 3px;
+  color: rgba(0, 0, 0, .25);
+  position: absolute;
   right: 0;
 }
 
-.sidebar-nav {
-  padding: 0;
-  list-style: none;
+.main-content {
+  margin-left: 250px;
 }
 
-.sidebar-nav-link {
-  line-height: 29px;
-  letter-spacing: -1px;
-  text-align: center;
-  padding: 13px 0;
-  margin: 0 15px;
-  font-size: 18px;
-  border-bottom: 1px solid #CCC;
-}
-
-.sidebar-nav-link:last-child {
-  border-bottom: 0px;
-}
-
-.sidebar-fa {
-  font-size: 1.5em;
-}
-
-.sidebar-nav-link a {
-  display: block;
-  text-decoration: none;
-  color: #dfe0e6;
-}
-
-.content {
-  margin-left: 105px;
-  margin-right: 250px;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-}
-
-.container-fluid, .row, .col-lg-4 {
-  height: 100%;
+.list-group a, a:hover{
+  color: #000 !important;
 }
 
 .list-group {
   float: left;
   height: auto;
-  max-height: 738px;
+  max-height: 528px;
   overflow-x: hidden;
   margin: 0;
-  padding-top: 42px;
+  padding-top: 57px;
+}
+
+.list-group-item {
+  border-radius: 0 !important;
+}
+
+.selected {
+  color: #FF9005;
 }
 
 .list-group-header {
   position: fixed;
   z-index: 1;
-  top: 0;
+  top: 210px;
+  color: #000 !important;
+  text-transform: uppercase;
+  padding-top: 25px;
+  background-color: #F1F2F4 !important;
+  border-color: #F1F2F4 !important;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  margin-bottom: 50px;
 }
 
 .artist-list, .artist-list .list-group-header {
-  width: 275px;
+  width: 290px;
 }
 
 .year-list, .year-list .list-group-header {
-  width: 150px;
+  width: 100px;
+  text-align: center;
 }
 
 .show-list, .show-list .list-group-header {
-  width: 250px;
+  width: 150px;
+  text-align: center;
 }
 
 .recording-list, .recording-list .list-group-header {
-  width: 250px;
+  width: 400px;
 }
 
 .artist-list:before {
@@ -122,106 +326,40 @@ a, a:hover {
   background-color: #dfe0e6;
 }
 
-.year-list:before {
-  z-index: 100;
-  content: "";
+.right-sidebar {
+  background-color: #F1F2F4;
   position: absolute;
-  left: 258px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
+  width: 250px;
+  right: 0;
+  top: 210px;
+  bottom: 0;
+  border-left: 1px solid rgba(0, 0, 0, .25);
+  padding: 25px;
 }
 
-.show-list:before {
-  z-index: 100;
-  content: "";
-  position: absolute;
-  left: 408px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
+.sources-header {
+  position: relative;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
 }
 
-.recording-list:before {
-  z-index: 100;
-  content: "";
-  position: absolute;
-  left: 658px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
+.sources-list {
+  margin-top: 15px;
 }
 
-.recording-list:after {
-  z-index: 100;
-  content: "";
-  position: absolute;
-  left: 908px;
-  height: 100%;
-  top: 0;
-  width: 4px;
-  background-color: #dfe0e6;
+.sources-list ul {
+  list-style-type: none;
 }
 
-.list-group-item {
-  background-color: #1c1c1f;
+.sources-list ul li{
+  font-size: .9em;
+  margin: 15px 0;
 }
 
-.player {
-  text-align: center;
+.content-container {
+  width: 940px;
+  margin-left: 250px;
+  padding: 0 25px;
 }
-
-.player-song-album-art {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.player-song-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  padding-top: 5px;
-}
-
-.player-song-artist {
-  font-size: 1.5em;
-  padding: 5px 0;
-}
-
-.progress {
-  width: 200px;
-  height: 5px;
-  margin: 15px auto 0;
-}
-
-.player-song-times {
-  margin-bottom: 15px;
-}
-
-.player-song-current-time {
-  float: left;
-  margin-left: 15px;
-}
-
-.player-song-total-time {
-  float: right;
-  margin-right: 15px;
-}
-
-.fas {
-  text-align: center;
-  padding-top: 10px;
-}
-
-.player-fa {
-  font-size: 2em;
-  margin: 0 20px;
-}
-
-.share {
-  font-size: 2em;
-  margin-top: 25px;
-}
-

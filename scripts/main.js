@@ -1,45 +1,34 @@
 $(function() {
   $('#sign-in-modal').modal();
-});
+  seekLogic();
 
-$('#magic').click(function() {
-  console.log("hi");
-  window.location = '/loggedin.html';
-});
+  $('.list-group-item').click(function() {
+    console.log("hmm");
+  });
 
+});
 
 $('#magic2').click(function() {
   console.log("hi");
   window.location = '/loggedin.html';
 });
 
-// var audio;
-// var first = true;
-//
-// $('#play').click(function() {
-//   if(first) {
-//     audio = new Audio('/test.mp3');
-//     first = false;
-//   }
-//   audio.play();
-//   $('#pause').toggle();
-//   $('#play').toggle();
-// });
-//
-// $('#pause').click(function() {
-//   $('#pause').toggle();
-//   $('#play').toggle();
-//   audio.pause();
-// });
-//
-// $('#fast-forward').click(function() {
-//   audio.pause();
-//   audio = new Audio('/music.mp3');
-//   audio.play();
-// });
-//
-// $('#fast-backward').click(function() {
-//   audio.pause();
-//   audio = new Audio('/test.mp3');
-//   audio.play();
-// });
+
+
+var seekLogic = function() {
+  var seekPos;
+
+  $('.progress').hover(function(e) {
+    $('#progress-seek').toggle();
+  });
+
+  $('.progress').mousemove(function(e) {
+    seekPos = e.pageX - $(this).offset().left + 20;
+    $('#progress-seek').css('left', seekPos + 'px');
+  });
+
+  $('.progress').click(function(e) {
+    var time = (seekPos - 20) / 200;
+    window.iguanaScope.seekTo(time);
+  });
+};

@@ -49,16 +49,23 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.playSong = function(recording, $event) {
     selectElement($event.target);
 
+
     $scope.title = recording.title;
     total_time_seconds = recording.length;
 
-    console.log(recording.file);
+    if(!$scope.audio1.playing) {
+      $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, true]);
+      $scope.audio1.playPause();
+    } else {
+      $scope.audio1.playPause();
+      // temp workaround
+      window.setTimeout(function() {
+        $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, false]);
+        $scope.audio1.playPause();
+      }, 100);
+    }
 
-    $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, true]);
     $scope.venue = current_venue;
-
-    $scope.audio1.playPause();
-
     var length = recording.length;
     var min = Math.floor(length/60);
     var sec = pad(length % 60, 2);
@@ -79,7 +86,6 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   });
 
   $scope.nextSong = function() {
-    console.log("nexter");
     $scope.audio1.next();
   };
 

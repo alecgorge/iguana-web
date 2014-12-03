@@ -24,6 +24,10 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
       current_artist = artist;
       $scope.years = result.data;
       $scope.artist = current_artist.name;
+
+      // reset other lists
+      $scope.shows = [];
+      $scope.recordings = [];
     });
   };
 
@@ -33,6 +37,9 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
     shows.get({artist_slug: current_artist.id, year_slug: year.year}).$promise.then(function(result) {
       current_year = year;
       $scope.shows = result.data.shows;
+
+      // reset other lists
+      $scope.recordings = [];
     });
   };
 

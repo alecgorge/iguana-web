@@ -123,7 +123,7 @@ body {
 }
 
 .player-progress-bar {
-  margin-top: 7px;
+  margin-top: 10px;
   background-color: #FFF;
   height: 2px;
   width: 90%;
@@ -133,17 +133,17 @@ body {
   margin-top: -3px;
   background-color: #FFF;
   height: 4px;
-  width: 230px;
+  width: 0%;
 }
 
 .player-progress-bar-knob {
-  position: absolute;
+  position: relative;
   width: 13px;
   height: 13px;
   background-color: #FFF;
   border-radius: 50%;
-  left: 500px;
-  top: 19px;
+  left: 0%;
+  top: -9px;
 }
 
 .player-time {

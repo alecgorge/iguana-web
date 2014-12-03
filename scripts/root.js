@@ -8,40 +8,54 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
 
   var current_artist;
   var current_year;
+  var current_venue;
   var total_time_seconds;
+
+  window.iguanaScope = $scope;
 
   artists.get().$promise.then(function(result) {
     $scope.artists = result.data;
   });
 
-  $scope.getYears = function(artist) {
+  $scope.getYears = function(artist, $event) {
+    selectElement($event.target);
+
     years.get({artist_slug: artist.id}).$promise.then(function(result) {
       current_artist = artist;
       $scope.years = result.data;
+      $scope.artist = current_artist.name;
     });
   };
 
-  $scope.getShows = function(year) {
+  $scope.getShows = function(year, $event) {
+    selectElement($event.target);
+
     shows.get({artist_slug: current_artist.id, year_slug: year.year}).$promise.then(function(result) {
       current_year = year;
       $scope.shows = result.data.shows;
     });
   };
 
-  $scope.getRecordings = function(show) {
+  $scope.getRecordings = function(show, $event) {
+    selectElement($event.target);
+
     recordings.get({artist_slug: current_artist.id, year_slug: current_year.year, show_date: show.display_date}).$promise.then(function(result) {
       $scope.recordings = result.data[0].tracks;
+
+      current_venue = show.display_date + " — " + show.venue_name + ', ' + show.venue_city;
     });
   };
 
-  $scope.playSong = function(recording) {
+  $scope.playSong = function(recording, $event) {
+    selectElement($event.target);
+
     $scope.title = recording.title;
-    $scope.artist = current_artist.name;
     total_time_seconds = recording.length;
 
     console.log(recording.file);
 
     $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, true]);
+    $scope.venue = current_venue;
 
     $scope.audio1.playPause();
 
@@ -73,10 +87,19 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
     $scope.audio1.playPause();
   }
 
+  $scope.seekTo = function(timePercent) {
+    $scope.audio1.seek(timePercent * total_time_seconds);
+  }
+
 }]);
 
 function pad(n, width, z) {
   z = z || '0';
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
+function selectElement(target) {
+  $(target).parent().parent().children().children().removeClass('selected');
+  $(target).addClass('selected');
 }

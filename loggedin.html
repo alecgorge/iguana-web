@@ -19,102 +19,133 @@
     <!-- Windows fa-->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-fa-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-
+    
+    <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' type='text/css'>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
   <body ng-controller="index">
 
-    <div class="sidebar sidebar-left">
-      <div class="sidebar-logo"></div>
-      <ul class="sidebar-nav sidebar-top">
-          <li class="sidebar-nav-link">
-            <span class="fa fa-search sidebar-fa"></span>
-            <a href="#">Browse</a>
-          </li>
-          <li class="sidebar-nav-link">
-            <span class="fa fa-bars sidebar-fa"></span>
-            <a href="#">Playlists</a>
-          </li>
-      </ul>
-      <ul class="sidebar-nav sidebar-bottom">
-          <li class="sidebar-nav-link">
-            <span class="fa fa-user sidebar-fa"></span>
-            <a href="#">Profile</a>
-          </li>
-          <li class="sidebar-nav-link">
-            <span class="fa fa-sign-out sidebar-fa"></span>
-            <a href="#">Logout</a>
-          </li>
-      </ul>
-    </div>
+    <div class="header">
+      <div class="header-logo">
+        <img class="header-logo-img" src="/images/icon_128x128.png">
+        <span class="header-logo-text">Relisten</span>
+      </div>
 
-    <div class="content">
-      <div class="row">
-          <ul class="list-group artist-list">
-            <li class="list-group-item list-group-header active">Artists</li>
-            <a href="#" ng-repeat="artist in artists" ng-click="getYears(artist)"><li class="list-group-item">{{artist.name}}</li></a>
-          </ul>
-
-          <ul class="list-group year-list">
-            <li class="list-group-item list-group-header active">Years</li>
-            <a href="#" ng-repeat="year in years" ng-click="getShows(year)"><li class="list-group-item">{{year.year}}</li></a>
-          </ul>
-
-          <ul class="list-group show-list">
-            <li class="list-group-item list-group-header active">Shows</li>
-            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(show)"><li class="list-group-item">{{show.title}}</li></a>
-          </ul>
-
-          <ul class="list-group recording-list">
-            <li class="list-group-item list-group-header active">Recordings</li>
-            <a href="#" ng-repeat="recording in recordings" ng-click="playSong(recording)"><li class="list-group-item">{{recording.title}}</li></a>
-          </ul>
-
+      <div class="header-artist-wrapper content-container">
+        <div class="header-artist">{{artist}}</div>
       </div>
     </div>
 
-    <div class="sidebar sidebar-right">
+    <div class="player-hero">
+      <div class="content-container">
+        <p class="player-hero-song">{{title}}</p>
+        <p class="player-hero-venue">{{venue}}</p>
+      </div>
       <div class="player">
-        <img class="player-song-album-art" src="/images/album-art.jpg">
-        <div class="player-song-title">{{title}}</div>
-        <div class="player-song-artist">{{artist}}</div>
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" ng-style="{width: current_time_percentage}"></div>
-        </div>
-
         <audio media-player="audio1" data-playlist="playlist1">
           <source src="" id="audio1-src" type="audio/ogg">
         </audio>
 
-        <div class="player-song-times">
-          <div class="player-song-current-time">{{current_time}}</div>
-          <div class="player-song-total-time">{{total_time}}</div>
+        <div class="player-main-controls-wrapper">
+          <div class="player-main-controls">
+            <div class="player-fa">
+              <i class="fa-fast-backward fa" id="fast-backward"></i>
+            </div>
+            <div class="player-fa-circle-play player-fa" ng-show="!audio1.playing">
+              <i class="fa-play fa" id="play" ng-click="playButton()"></i>
+            </div>
+            <div class="player-fa-circle-pause player-fa" ng-show="audio1.playing">
+              <i class="fa-pause fa" id="pause" ng-click="playButton()"></i>
+            </div>
+            <div class="player-fa">
+              <i class="fa-fast-forward fa" id="fast-forward"></i>
+            </div>
+          </div>
         </div>
-        <div class="fas">
-          <i class="fa-fast-backward fa player-fa" id="fast-backward"></i>
-          <i class="fa-play fa player-fa" id="play" ng-show="!audio1.playing" ng-click="playButton()"></i>
-          <i class="fa-pause fa player-fa" id="pause" ng-show="audio1.playing" ng-click="playButton()"></i>
-          <i class="fa-fast-forward fa player-fa" id="fast-forward"></i>
+
+        <div class="player-progress content-container">
+          <div class="player-progress-bar"></div>
+          <div class="player-progress-bar-filled"></div>
+          <div class="player-progress-bar-knob"></div>
+          <div class="player-time">3:15/12:02</div>
         </div>
 
-        <div id="fb-root"></div>
-        <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) return;
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1412777015670060&version=v2.0";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
-
-
-        <div class="share">
-          <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"></div>
+        <div class="player-secondary-controls">
+          <i class="fa-volume-up fa"></i>
+          <div class="volume-bar"></div>
+          <div class="volume-bar-filled"></div>
+          <div class="volume-bar-knob"></div>
         </div>
       </div>
     </div>
 
+    <div class="left-sidebar">
+      <div class="menu">
+        <div class="menu-header">
+          Menu
+        </div>
+        <div class="menu-list">
+          <ul>
+            <li>Browse</li>
+            <li>Queue</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="playlists">
+        <div class="playlists-header">
+          Playlists
+          <i class="fa fa-plus-circle"></i>
+        </div>
+        <div class="playlists-list">
+          <ul>
+            <li>Nigga Hood Rap</li>
+            <li>San Diego</li>
+            <li>More hood rap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="row">
+          <ul class="list-group artist-list">
+            <li class="list-group-item list-group-header active">Artists</li>
+            <a href="#" ng-repeat="artist in artists" ng-click="getYears(artist, $event)"><li class="list-group-item">{{artist.name}}</li></a>
+          </ul>
+
+          <ul class="list-group year-list">
+            <li class="list-group-item list-group-header active">Years</li>
+            <a href="#" ng-repeat="year in years" ng-click="getShows(year, $event)"><li class="list-group-item">{{year.year}}</li></a>
+          </ul>
+
+          <ul class="list-group show-list">
+            <li class="list-group-item list-group-header active">Shows</li>
+            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(show, $event)"><li class="list-group-item">{{show.display_date}}</li></a>
+          </ul>
+
+          <ul class="list-group recording-list">
+            <li class="list-group-item list-group-header active">Recordings</li>
+            <a href="#" ng-repeat="recording in recordings" ng-click="playSong(recording, $event)"><li class="list-group-item">{{recording.title}}</li></a>
+          </ul>
+      </div>
+    </div>
+
+    <div class="right-sidebar">
+      <div class="sources">
+        <div class="sources-header">
+          2 Source(s)
+        </div>
+        <div class="sources-list">
+          <ul>
+            <li>Browse</li>
+            <li>Queue</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>

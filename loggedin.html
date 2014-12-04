@@ -161,6 +161,8 @@
         <ul class="list-group recording-list">
           <li ng-repeat="recording in recordings">
             <a class="list-group-item" ng-click="playSong(recording, $event)">
+              <span class="pull-left track">{{recording.track}}</span>
+              <span class="pull-right duration">{{recording.length | humanizeTime:true}}</span>
               {{recording.title}}
             </a>
           </li>
@@ -180,11 +182,12 @@
           <p>{{source.taper}}</p>
 
           <div class="sources-header">Description</div>
-          <p>{{source.description}}</p>
+          <p class="preformatted">{{source.description}}</p>
         </div>
       </div>
     </div>
 
+    <script src="http://momentjs.com/downloads/moment.min.js"></script>
     <script src="scripts/jquery.min.js"></script>
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>

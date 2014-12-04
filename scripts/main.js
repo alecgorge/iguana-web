@@ -13,8 +13,6 @@ $('#magic2').click(function() {
   window.location = '/loggedin.html';
 });
 
-
-
 var seekLogic = function() {
   var seekPos;
 

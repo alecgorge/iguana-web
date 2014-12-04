@@ -197,11 +197,7 @@ body {
 }
 
 .left-sidebar {
-  position: absolute;
   background-color: #F1F2F4;
-  width: 250px;
-  left: 0;
-  top: 210px;
   bottom: 0;
   border-right: 1px solid rgba(0, 0, 0, .25);
   padding: 25px;
@@ -230,11 +226,7 @@ body {
 
 /* this is wrong, but looks okay */
 .playlists {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  height: 300px;
-  padding-right: 50px;
+  padding-top: 50px;
 }
 
 .playlists-header {
@@ -269,69 +261,191 @@ body {
   margin-left: 250px;
 }
 
+     /* encapsulate the various syntax in helper clases */
+      /* inspired by http://infrequently.org/2009/08/css-3-progress/ */
+
+      /* items flex/expand vertically */
+      .vbox {
+        /* previous syntax */
+        display: -webkit-box;
+        display:    -moz-box;
+        display:         box;
+
+        -webkit-box-orient: vertical;
+           -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+                box-orient: vertical;
+
+        /* current syntax */
+        display: -webkit-flex;
+        display:    -moz-flex;
+        display:     -ms-flex;
+        display:         flex;
+
+        -webkit-flex-direction: column;
+           -moz-flex-direction: column;
+            -ms-flex-direction: column;
+                flex-direction: column;
+      }
+
+      /* items flex/expand horizontally */
+      .hbox {
+        /* previous syntax */
+        display: -webkit-box;
+        display:    -moz-box;
+        display:     -ms-box;
+        display:         box;
+
+        -webkit-box-orient: horizontal;
+           -moz-box-orient: horizontal;
+            -ms-box-orient: horizontal;
+                box-orient: horizontal;
+
+        /* current syntax */
+        display: -webkit-flex;
+        display:    -moz-flex;
+        display:     -ms-flex;
+        display:         flex;
+
+        -webkit-flex-direction: row;
+           -moz-flex-direction: row;
+            -ms-flex-direction: row;
+                flex-direction: row;
+      }
+
+      .space-between {
+        /* previous syntax */
+        -webkit-box-pack: justify;
+           -moz-box-pack: justify;
+            -ms-box-pack: justify;
+                box-pack: justify;
+
+        /* current syntax */
+        -webkit-justify-content: space-between;
+           -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+                justify-content: space-between;
+      }
+
+
+      .main {
+        /* previous syntax */
+        -webkit-box-flex: 1;
+           -moz-box-flex: 1;
+            -ms-box-flex: 1;
+                box-flex: 1;
+
+        /* current syntax */
+        -webkit-flex: 1;
+           -moz-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+      }
+
+      .disp-col {
+        /* previous syntax */
+        -webkit-box-flex: 5;
+           -moz-box-flex: 5;
+            -ms-box-flex: 5;
+                box-flex: 5;
+
+        /* current syntax */
+        -webkit-flex: 5;
+           -moz-flex: 5;
+            -ms-flex: 5;
+                flex: 5;
+      }
+
+html, body, .viewport {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+.left-sidebar, .right-sidebar {
+  flex: 3;
+  overflow-y: auto;
+}
+
 .list-group-collection {
-  display: table-row;
 }
 
 .list-group a, a:hover{
   color: #000 !important;
 }
 
-.list-group {
-  float: left;
-  height: auto;
-  max-height: 528px;
-  overflow-x: hidden;
-  margin: 0;
-  padding-top: 57px;
-  border-left: 1px solid #DDD;
-  display: table-cell;
+.recording-list.list-group {
+  border: 0;
 }
 
-.list-group-item {
-  border-radius: 0 !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
+body .recording-list .list-group-header {
+  border-right: 0;
+}
+
+.list-group {
+  /*float: left;*/
+  height: auto;
+  /*max-height: 528px;*/
+  /*overflow-x: hidden;*/
+  overflow-y: auto;
+  margin: 0;
+  /*padding-top: 57px;*/
+  border-right: 1px solid #DDD;
+  flex: 1;
+  position: relative;
+}
+
+body .list-group-item {
+  border-radius: 0 ;
+  border-left: none ;
+  border-right: none ;
+  border-top: none ;
+
 }
 
 .selected {
   color: #FF9005;
 }
 
-.list-group-header {
-  position: fixed;
-  z-index: 1;
-  top: 210px;
+body .list-group-header {
+  /*position: fixed;*/
+  /*width: 100%;*/
+  /*z-index: 1;*/
+  /*top: 210px;*/
   color: #000 !important;
   text-transform: uppercase;
-  padding-top: 25px;
+  padding-top: 30px;
+  font-size: 1.2em;
   background-color: #F1F2F4 !important;
-  border-color: #F1F2F4 !important;
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
-  margin-bottom: 50px;
+  /*border-color: #F1F2F4 !important;*/
+  border-bottom: 1px solid rgba(0,0,0,.25);
+  border-right: 1px solid rgba(0,0,0,.10);
+  margin: 0;
+  padding-bottom: 10px;
+  box-sizing: border-box;
+  /*margin-bottom: 50px;*/
 }
 
 .artist-list .list-group-item {
-  padding-left: 25px;
+  /*padding-left: 25px;*/
 }
 
 .artist-list, .artist-list .list-group-header {
-  width: 290px;
+  /*width: 290px;*/
 }
 
 .year-list, .year-list .list-group-header {
-  width: 100px;
+  /*width: 100px;*/
   text-align: center;
 }
 
 .show-list, .show-list .list-group-header {
-  width: 150px;
+  /*width: 150px;*/
   text-align: center;
 }
 
 .recording-list, .recording-list .list-group-header {
-  width: 400px;
+  /*width: 400px;*/
 }
 
 .artist-list:before {
@@ -347,10 +461,6 @@ body {
 
 .right-sidebar {
   background-color: #F1F2F4;
-  position: absolute;
-  width: 250px;
-  right: 0;
-  top: 210px;
   bottom: 0;
   border-left: 1px solid rgba(0, 0, 0, .25);
   padding: 25px;

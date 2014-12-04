@@ -1,7 +1,7 @@
 var root = angular.module('root', ["ngResource", "mediaPlayer"])
 
 .controller("index", ["$scope", "$resource", function ($scope, $resource) {
-  var artists = $resource("http://localhost:9000/api/artists");
+  var artists = $resource("http://iguana-staging.app.alecgorge.com/api/artists");
   var years = $resource('http://localhost:9000/api/artists/:artist_slug/years');
   var shows = $resource('http://localhost:9000/api/artists/:artist_slug/years/:year_slug');
   var recordings = $resource('http://localhost:9000/api/artists/:artist_slug/years/:year_slug/shows/:show_date');

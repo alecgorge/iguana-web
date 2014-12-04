@@ -78,9 +78,12 @@
 
         <div class="player-secondary-controls">
           <i class="fa-volume-up fa"></i>
-          <div class="volume-bar"></div>
-          <div class="volume-bar-filled"></div>
-          <div class="volume-bar-knob"></div>
+          <div class="volume-bar-wrapper">
+            <div class="volume-bar">
+              <div class="volume-bar-filled" ng-style="{width: current_volume_percentage}"></div>
+              <div class="volume-bar-knob" ng-style="{left: current_volume_percentage}"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -157,8 +160,6 @@
     <script src="scripts/angular-resource.min.js"></script>
     <script src="scripts/angular-media-player.min.js"></script>
     <script src="scripts/root.js"></script>
-    <script src="scripts/controllers.js"></script>
-    <script src="scripts/services.js"></script>
     <script src="scripts/main.js"></script>
   </body>
 </html>

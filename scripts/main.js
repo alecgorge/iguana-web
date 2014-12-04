@@ -1,15 +1,10 @@
 $(function() {
   $('#sign-in-modal').modal();
   seekLogic();
-
-  $('.list-group-item').click(function() {
-    console.log("hmm");
-  });
-
+  volumeLogic();
 });
 
 $('#magic2').click(function() {
-  console.log("hi");
   window.location = '/loggedin.html';
 });
 
@@ -21,9 +16,20 @@ var seekLogic = function() {
   });
 
   $('.player-progress-bar-wrapper').click(function(e) {
-    console.log($(this).children().width())
-    console.log("seekpos: "+seekPos+". width: "+$(this).children().width());
     var time = seekPos / $(this).children().width();
     window.iguanaScope.seekTo(time);
+  });
+};
+
+var volumeLogic = function() {
+  var volumePos;
+
+  $('.volume-bar-wrapper').mousemove(function(e) {
+    volumePos = e.pageX - $(this).children().offset().left - 5;
+  });
+
+  $('.volume-bar-wrapper').click(function(){
+    var percent = volumePos / $(this).children().width();
+    window.iguanaScope.audio1.setVolume(percent);
   });
 };

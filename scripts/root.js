@@ -20,7 +20,6 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.getYears = function(artist, $event) {
     selectElement($event.target);
 
-    console.log(artist);
     years.get({artist_slug: artist.slug}).$promise.then(function(result) {
       current_artist = artist;
       $scope.years = result.data;
@@ -94,6 +93,10 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
     }
 
     $scope.current_time_percentage = newValue / total_time_seconds * 100 + '%';
+  });
+
+  $scope.$watch("audio1.volume", function (newValue) {
+    $scope.current_volume_percentage = newValue * 100 + '%';
   });
 
   $scope.nextSong = function() {

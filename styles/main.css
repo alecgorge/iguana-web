@@ -13,10 +13,14 @@ body {
 }
 
 .header {
-  position: absolute;
-  top: 0;
+  /* position: absolute; */
+  /* top: 0; */
   height: 60px;
   width: 100%;
+}
+
+.header-logo {
+  flex: 3;
 }
 
 .header-logo-img {
@@ -33,64 +37,49 @@ body {
 }
 
 .header-artist-wrapper {
+  flex: 16;
   margin: 5px 25px;
+  padding: 0 25px;
   border-left: 1px solid rgba(0, 0, 0, .25);
-  height: 50px;
-  box-sizing: border-box;
 }
 
 .header-artist {
-  position: relative;
-  top: 15px;
+  margin-top: 13px;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.2em;
   color: rgba(0, 0, 0, .75);
 }
 
-.player-hero {
-  color: #FFF;
-  margin-top: 60px;
-  padding-top: 20px;
-  height: 150px;
-  background-image: url('../images/sunset-bg.png');
-  background-size: cover;
-  background-position: 0 180px;
-  position: relative;
+.player-hero-first-third, .player-hero-last-third {
+  flex: 3;
 }
 
-.player-hero-song {
-  font-size: 1.7em;
-  font-weight: 300;
-  margin-bottom: 3px;
+.player-hero-second-third {
+  flex: 12;
 }
 
-.player-hero-venue {
-  font-weight: bold;
+.vertical-spacer, .player-hero-text {
+  flex: 1;
 }
 
-.player {
-  text-align: center;
-  background-color: rgba(0, 0, 0, .25);
-  height: 50px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
+/******************************************************************************/
 
 .player-main-controls-wrapper {
-  float: left;
-  width: 250px;
   padding-top: 15px;
 }
 
+.player-main-controls-wrapper, .player-progress-bar-bottom, .player-secondary-controls {
+  background-color: rgba(0, 0, 0, .25);
+  height: 50px;
+}
+
 .player-main-controls {
-  width: 195px;
-  margin: 0 auto;
+  text-align: center;
 }
 
 .player-fa {
-  float: left;
+  display: inline-block;
   margin: 0 20px;
   width: 25px;
   height: 25px;
@@ -114,29 +103,56 @@ body {
   border: 1px solid #FFF;
 }
 
-.player-progress {
-  margin-top: 17px;
-  float: left;
-  width: 100%;
-  height: 100%;
-  margin-left: 0 !important;
+/******************************************************************************/
+
+.player-hero {
+  color: #FFF;
+  height: 150px;
+  background-image: url('../images/sunset-bg.png');
+  background-size: cover;
+  background-position: 0 180px;
+}
+
+.player-progress-bar-bottom {
+  padding-top: 17px;
+}
+
+.player-hero-text, .player-progress-bar-bottom {
+  padding: 0 25px;
+}
+
+.player-hero-text {
+  margin-top: 25px;
+}
+
+.player-hero-song {
+  font-size: 1.7em;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+
+.player-hero-venue {
+  font-weight: bold;
 }
 
 /* this is to give the progress bar more height, so it's easier to click */
 .player-progress-bar-wrapper {
-  margin-top: -10px;
-  padding: 10px 0;
-}
-
-.player-progress-bar {
-  margin: 10px 0;
-  background-color: #FFF;
-  height: 2px;
+  display: inline-block;
+  line-height: 50px;
   width: 90%;
 }
 
+.player-progress-bar {
+  display: inline-block;
+  line-height: 50px;
+  background-color: #FFF;
+  height: 2px;
+  margin-bottom: 3px;
+  width: 100%;
+}
+
 .player-progress-bar-filled {
-  margin-top: -3px;
+  margin-top: -1px;
   background-color: #FFF;
   height: 4px;
   width: 0%;
@@ -153,33 +169,35 @@ body {
 }
 
 .player-time {
-  position: absolute;
-  right: 275px;
-  top: 15px;
+  display: inline-block;
+  text-align: right;
+  width: 9%;
 }
 
+/******************************************************************************/
+
 .player-secondary-controls {
-  margin-top: 17px;
-  float: left;
-  width: 250px;
   padding: 0 25px;
 }
 
 .fa-volume-up {
-  float: left;
+  display: inline-block;
+  line-height: 50px;
+  margin-right: 5px;
 }
 
 .volume-bar-wrapper {
-  margin-top: -10px;
-  padding: 10px 0;
+  display: inline-block;
+  line-height: 50px;
+  width: 80%;
 }
 
 .volume-bar {
-  margin-top: 6px;
-  margin-left: 10px;
-  float: left;
-  width: 170px;
+  display: inline-block;
+  line-height: 50px;
+  width: 100%;
   height: 2px;
+  margin-bottom: 5px;
   background-color: #FFF;
 }
 
@@ -187,7 +205,6 @@ body {
   margin-top: -1px;
   background-color: #FFF;
   height: 4px;
-  width: 60%;
 }
 
 .volume-bar-knob {
@@ -196,20 +213,19 @@ body {
   height: 13px;
   background-color: #FFF;
   border-radius: 50%;
-  left: 60%;
   margin-left: -3px;
   top: -8px;
 }
 
+/******************************************************************************/
+
 .left-sidebar {
   background-color: #F1F2F4;
-  bottom: 0;
   border-right: 1px solid rgba(0, 0, 0, .25);
   padding: 25px;
 }
 
 .menu-header {
-  position: relative;
   font-size: 1.2em;
   text-transform: uppercase;
   padding-bottom: 10px;
@@ -520,8 +536,8 @@ body .disp-col .list-group-header {
   margin: 15px 0;
 }
 
-.content-container {
-  width: 940px;
-  margin-left: 250px;
-  padding: 0 25px;
-}
+/* .content-container { */
+/*   width: 940px; */
+/*   margin-left: 250px; */
+/*   padding: 0 25px; */
+/* } */

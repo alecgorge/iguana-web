@@ -19,7 +19,7 @@
     <!-- Windows fa-->
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-fa-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#3372DF">
-    
+
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' type='text/css'>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/font-awesome.min.css">
@@ -27,26 +27,20 @@
   </head>
   <body ng-controller="index" class="vbox viewport">
 
-    <div class="header">
+    <div class="header hbox">
       <div class="header-logo">
         <img class="header-logo-img" src="/images/icon_128x128.png">
-        <span class="header-logo-text">Relisten</span>
+        <div class="header-logo-text">Relisten</div>
       </div>
 
-      <div class="header-artist-wrapper content-container">
+      <div class="header-artist-wrapper">
         <div class="header-artist">{{artist}}</div>
       </div>
     </div>
 
-    <div class="player-hero">
-      <div class="content-container">
-        <p class="player-hero-song">{{title}}</p>
-        <p class="player-hero-venue">{{venue}}</p>
-      </div>
-      <div class="player">
-        <audio media-player="audio1" data-playlist="playlist1">
-          <source src="" id="audio1-src" type="audio/ogg">
-        </audio>
+    <div class="player-hero hbox">
+      <div class="player-hero-first-third vbox">
+        <div class="vertical-spacer"></div>
 
         <div class="player-main-controls-wrapper">
           <div class="player-main-controls">
@@ -64,17 +58,32 @@
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="player-progress content-container">
+      <audio media-player="audio1" data-playlist="playlist1">
+        <source src="" id="audio1-src" type="audio/ogg">
+      </audio>
+
+      <div class="player-hero-second-third vbox">
+        <div class="player-hero-text">
+          <p class="player-hero-song">{{title}}</p>
+          <p class="player-hero-venue">{{venue}}</p>
+        </div>
+
+        <div class="player-progress-bar-bottom">
           <div class="player-progress-bar-wrapper">
-          <div class="player-progress-bar">
-            <div class="player-progress-bar-filled" ng-style="{width: current_time_percentage}"></div>
-            <div class="player-progress-bar-knob" ng-style="{left: current_time_percentage}"></div>
-          </div>
+            <div class="player-progress-bar">
+              <div class="player-progress-bar-filled" ng-style="{width: current_time_percentage}"></div>
+              <div class="player-progress-bar-knob" ng-style="{left: current_time_percentage}"></div>
+            </div>
           </div>
           <div class="player-time" ng-show="audio1.playing">{{current_time}}/{{total_time}}</div>
           <div class="player-time" ng-show="!audio1.playing">0:00/0:00</div>
         </div>
+      </div>
+
+      <div class="player-hero-last-third vbox">
+        <div class="vertical-spacer"></div>
 
         <div class="player-secondary-controls">
           <i class="fa-volume-up fa"></i>
@@ -89,36 +98,34 @@
     </div>
 
     <div class="list-group-collection main hbox space-between">
-    <div class="left-sidebar">
-      <div class="menu">
-        <div class="menu-header">
-          Menu
+      <div class="left-sidebar">
+        <div class="menu">
+          <div class="menu-header">
+            Menu
+          </div>
+          <div class="menu-list">
+            <ul>
+              <li>Browse</li>
+              <li>Queue</li>
+            </ul>
+          </div>
         </div>
-        <div class="menu-list">
-          <ul>
-            <li>Browse</li>
-            <li>Queue</li>
-          </ul>
+
+        <div class="playlists">
+          <div class="playlists-header">
+            Playlists
+            <i class="fa fa-plus-circle"></i>
+          </div>
+          <div class="playlists-list">
+            <ul>
+              <li>Nigga Hood Rap</li>
+              <li>San Diego</li>
+              <li>More hood rap</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="playlists">
-        <div class="playlists-header">
-          Playlists
-          <i class="fa fa-plus-circle"></i>
-        </div>
-        <div class="playlists-list">
-          <ul>
-            <li>Nigga Hood Rap</li>
-            <li>San Diego</li>
-            <li>More hood rap</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- <div class="main-content"> -->
-      <!-- <div class="row"> -->
       <div class="disp-col vbox col-artists-list">
         <h3 class="list-group-item list-group-header">Artists</h3>
         <ul class="list-group artist-list">
@@ -159,22 +166,20 @@
           </li>
         </ul>
       </div>
-      <!-- </div> -->
-    <!-- </div> -->
 
-    <div class="right-sidebar">
-      <div class="sources">
-        <div class="sources-header">
-          2 Source(s)
-        </div>
-        <div class="sources-list">
-          <ul>
-            <li>Browse</li>
-            <li>Queue</li>
-          </ul>
+      <div class="right-sidebar">
+        <div class="sources">
+          <div class="sources-header">
+            2 Source(s)
+          </div>
+          <div class="sources-list">
+            <ul>
+              <li>Browse</li>
+              <li>Queue</li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
     </div>
 
     <script src="scripts/jquery.min.js"></script>

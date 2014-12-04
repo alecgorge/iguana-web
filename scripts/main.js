@@ -1,6 +1,7 @@
 $(function() {
   $('#sign-in-modal').modal();
   seekLogic();
+  window.iguanaScope.audio1.setVolume(.6);
   volumeLogic();
 });
 

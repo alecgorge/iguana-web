@@ -122,8 +122,14 @@ body {
   margin-left: 0 !important;
 }
 
+/* this is to give the progress bar more height, so it's easier to click */
+.player-progress-bar-wrapper {
+  margin-top: -10px;
+  padding: 10px 0;
+}
+
 .player-progress-bar {
-  margin-top: 10px;
+  margin: 10px 0;
   background-color: #FFF;
   height: 2px;
   width: 90%;
@@ -263,6 +269,10 @@ body {
   margin-left: 250px;
 }
 
+.list-group-collection {
+  display: table-row;
+}
+
 .list-group a, a:hover{
   color: #000 !important;
 }
@@ -274,10 +284,15 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding-top: 57px;
+  border-left: 1px solid #DDD;
+  display: table-cell;
 }
 
 .list-group-item {
   border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
 }
 
 .selected {

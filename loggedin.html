@@ -126,12 +126,46 @@
         </div>
       </div>
 
-      <!-- ################################################################ -->
+      <div class="disp-col vbox col-artists-list">
+        <h3 class="list-group-item list-group-header">Artists</h3>
+        <ul class="list-group artist-list">
+          <li ng-repeat="artist in artists">
+            <a class="list-group-item" ng-click="getYears(artist, $event)">
+              {{artist.name}}
+            </a>
+          </li>
+        </ul>
+      </div>
 
-      <!-- <ng&#45;view></ng&#45;view> -->
-      <div ng-view></div>
+      <div class="disp-col vbox col-years-list">
+        <h3 class="list-group-item list-group-header">Years</h3>
+        <ul class="list-group year-list">
+          <li ng-repeat="year in years">
+            <a class="list-group-item" ng-click="getShows(year, $event)">{{year.year}}</a>
+          </li>
+        </ul>
+      </div>
 
-      <!-- ################################################################ -->
+      <div class="disp-col vbox col-shows-list">
+        <h3 class="list-group-item list-group-header">Shows</h3>
+        <ul class="list-group show-list">
+          <li ng-repeat="show in shows">
+            <a class="list-group-item" ng-click="getRecordings(show, $event)">
+              {{show.display_date}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="disp-col vbox col-recording-list">
+        <h3 class="list-group-item list-group-header">Recordings</h3>
+        <ul class="list-group recording-list">
+          <li ng-repeat="recording in recordings">
+            <a class="list-group-item" ng-click="playSong(recording, $event)">
+              {{recording.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
 
       <div class="right-sidebar">
         <div class="sources">

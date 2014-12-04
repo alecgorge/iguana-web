@@ -13,8 +13,6 @@ body {
 }
 
 .header {
-  /* position: absolute; */
-  /* top: 0; */
   height: 60px;
   width: 100%;
 }
@@ -432,13 +430,9 @@ body .disp-col.col-recording-list .list-group-header {
 }
 
 .list-group {
-  /*float: left;*/
   height: auto;
-  /*max-height: 528px;*/
-  /*overflow-x: hidden;*/
   overflow-y: auto;
   margin: 0;
-  /*padding-top: 57px;*/
   border-right: 1px solid #DDD;
   flex: 1;
   position: relative;
@@ -457,44 +451,20 @@ a.list-group-item.selected {
 }
 
 body .disp-col .list-group-header {
-  /*position: fixed;*/
-  /*width: 100%;*/
-  /*z-index: 1;*/
-  /*top: 210px;*/
   color: #000 !important;
   text-transform: uppercase;
   padding-top: 30px;
   font-size: 1.2em;
   background-color: #F8FAFC !important;
-  /*border-color: #F1F2F4 !important;*/
   border-bottom: 1px solid rgba(0,0,0,.25);
   border-right: 1px solid rgba(0,0,0,.10);
   margin: 0;
   padding-bottom: 10px;
   box-sizing: border-box;
-  /*margin-bottom: 50px;*/
 }
 
 .col-artists-list .list-group-item {
   padding-left: 25px;
-}
-
-.artist-list, .artist-list .list-group-header {
-  /*width: 290px;*/
-}
-
-.year-list, .year-list .list-group-header {
-  /*width: 100px;*/
-  /*text-align: center;*/
-}
-
-.show-list, .show-list .list-group-header {
-  /*width: 150px;*/
-  /*text-align: center;*/
-}
-
-.recording-list, .recording-list .list-group-header {
-  /*width: 400px;*/
 }
 
 .artist-list:before {
@@ -535,9 +505,3 @@ body .disp-col .list-group-header {
   font-size: .9em;
   margin: 15px 0;
 }
-
-/* .content-container { */
-/*   width: 940px; */
-/*   margin-left: 250px; */
-/*   padding: 0 25px; */
-/* } */

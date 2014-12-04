@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="styles/font-awesome.min.css">
     <link rel="stylesheet" href="styles/main.css">
   </head>
-  <body ng-controller="index">
+  <body ng-controller="index" class="vbox viewport">
 
     <div class="header">
       <div class="header-logo">
@@ -88,6 +88,7 @@
       </div>
     </div>
 
+    <div class="list-group-collection main hbox space-between">
     <div class="left-sidebar">
       <div class="menu">
         <div class="menu-header">
@@ -116,29 +117,50 @@
       </div>
     </div>
 
-    <div class="main-content">
-      <div class="row list-group-collection">
-          <ul class="list-group artist-list">
-            <li class="list-group-item list-group-header active">Artists</li>
-            <a href="#" ng-repeat="artist in artists" ng-click="getYears(artist, $event)"><li class="list-group-item">{{artist.name}}</li></a>
-          </ul>
-
-          <ul class="list-group year-list">
-            <li class="list-group-item list-group-header active">Years</li>
-            <a href="#" ng-repeat="year in years" ng-click="getShows(year, $event)"><li class="list-group-item">{{year.year}}</li></a>
-          </ul>
-
-          <ul class="list-group show-list">
-            <li class="list-group-item list-group-header active">Shows</li>
-            <a href="#" ng-repeat="show in shows" ng-click="getRecordings(show, $event)"><li class="list-group-item">{{show.display_date}}</li></a>
-          </ul>
-
-          <ul class="list-group recording-list">
-            <li class="list-group-item list-group-header active">Recordings</li>
-            <a href="#" ng-repeat="recording in recordings" ng-click="playSong(recording, $event)"><li class="list-group-item">{{recording.title}}</li></a>
-          </ul>
+    <!-- <div class="main-content"> -->
+      <!-- <div class="row"> -->
+      <div class="disp-col vbox col-artists-list">
+        <h3 class="list-group-item list-group-header">Artists</h3>
+        <ul class="list-group artist-list">
+          <li ng-repeat="artist in artists">
+            <a class="list-group-item" href="#" ng-click="getYears(artist, $event)">
+              {{artist.name}}
+            </a>
+          </li>
+        </ul>
       </div>
-    </div>
+
+      <div class="disp-col vbox col-years-list">
+        <h3 class="list-group-item list-group-header">Years</h3>
+        <ul class="list-group year-list">
+          <li ng-repeat="year in years">
+            <a class="list-group-item" href="#" ng-click="getShows(year, $event)">{{year.year}}</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="disp-col vbox col-shows-list">
+        <h3 class="list-group-item list-group-header">Shows</h3>
+        <ul class="list-group show-list">
+          <li ng-repeat="show in shows">
+            <a class="list-group-item" href="#" ng-click="getRecordings(show, $event)">
+              {{show.display_date}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="disp-col vbox col-recording-list">
+        <h3 class="list-group-item list-group-header">Recordings</h3>
+        <ul class="list-group recording-list">
+          <li ng-repeat="recording in recordings">
+            <a class="list-group-item" href="#" ng-click="playSong(recording, $event)">
+              {{recording.title}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- </div> -->
+    <!-- </div> -->
 
     <div class="right-sidebar">
       <div class="sources">
@@ -152,6 +174,7 @@
           </ul>
         </div>
       </div>
+    </div>
     </div>
 
     <script src="scripts/jquery.min.js"></script>

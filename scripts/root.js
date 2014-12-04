@@ -1,10 +1,10 @@
 var root = angular.module('root', ["ngResource", "mediaPlayer"])
 
 .controller("index", ["$scope", "$resource", function ($scope, $resource) {
-  var artists = $resource("http://iguana-staging.app.alecgorge.com/api/artists");
-  var years = $resource('http://localhost:9000/api/artists/:artist_slug/years');
-  var shows = $resource('http://localhost:9000/api/artists/:artist_slug/years/:year_slug');
-  var recordings = $resource('http://localhost:9000/api/artists/:artist_slug/years/:year_slug/shows/:show_date');
+  var artists = $resource('http://iguana-staging.app.alecgorge.com/api/artists');
+  var years = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years');
+  var shows = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug');
+  var recordings = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug/shows/:show_date');
 
   var current_artist;
   var current_year;
@@ -20,7 +20,8 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.getYears = function(artist, $event) {
     selectElement($event.target);
 
-    years.get({artist_slug: artist.id}).$promise.then(function(result) {
+    console.log(artist);
+    years.get({artist_slug: artist.slug}).$promise.then(function(result) {
       current_artist = artist;
       $scope.years = result.data;
       $scope.artist = current_artist.name;
@@ -34,7 +35,8 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.getShows = function(year, $event) {
     selectElement($event.target);
 
-    shows.get({artist_slug: current_artist.id, year_slug: year.year}).$promise.then(function(result) {
+    shows.get({artist_slug: current_artist.slug, 
+               year_slug: year.year}).$promise.then(function(result) {
       current_year = year;
       $scope.shows = result.data.shows;
 
@@ -46,7 +48,9 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
   $scope.getRecordings = function(show, $event) {
     selectElement($event.target);
 
-    recordings.get({artist_slug: current_artist.id, year_slug: current_year.year, show_date: show.display_date}).$promise.then(function(result) {
+    recordings.get({artist_slug: current_artist.slug, 
+                    year_slug: current_year.year, 
+                    show_date: show.display_date}).$promise.then(function(result) {
       $scope.recordings = result.data[0].tracks;
 
       current_venue = show.display_date + " — " + show.venue_name + ', ' + show.venue_city;

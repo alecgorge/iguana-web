@@ -18,17 +18,14 @@ $('#magic2').click(function() {
 var seekLogic = function() {
   var seekPos;
 
-  $('.progress').hover(function(e) {
-    $('#progress-seek').toggle();
+  $('.player-progress-bar-wrapper').mousemove(function(e) {
+    seekPos = e.pageX - $(this).children().offset().left - 5;
   });
 
-  $('.progress').mousemove(function(e) {
-    seekPos = e.pageX - $(this).offset().left + 20;
-    $('#progress-seek').css('left', seekPos + 'px');
-  });
-
-  $('.progress').click(function(e) {
-    var time = (seekPos - 20) / 200;
+  $('.player-progress-bar-wrapper').click(function(e) {
+    console.log($(this).children().width())
+    console.log("seekpos: "+seekPos+". width: "+$(this).children().width());
+    var time = seekPos / $(this).children().width();
     window.iguanaScope.seekTo(time);
   });
 };

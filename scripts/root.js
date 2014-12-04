@@ -1,7 +1,7 @@
 var root = angular.module('root', ["ngResource", "mediaPlayer", "ngRoute"]);
 
 root.config(function($routeProvider) {
-  $routeProvider.when('/', {
+  $routeProvider.when('/browse', {
     templateUrl: 'browse.html',
     controller: 'index'
   }).when('/hello', {

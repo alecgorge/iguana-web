@@ -8,10 +8,6 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.selected {
-  color: #FF9005;
-}
-
 .header {
   height: 60px;
   width: 100%;
@@ -221,6 +217,21 @@ body {
   background-color: #F1F2F4;
   border-right: 1px solid rgba(0, 0, 0, .25);
   padding: 25px;
+}
+
+.left-sidebar a {
+  color: #000;
+  text-decoration: none;
+}
+
+.left-sidebar .selected a {
+  color: #FF9005;
+}
+
+
+.left-sidebar a {
+  color: #000;
+  text-decoration: none;
 }
 
 .menu-header {

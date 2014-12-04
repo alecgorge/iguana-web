@@ -482,19 +482,30 @@ body .disp-col .list-group-header {
   background-color: #F1F2F4;
   bottom: 0;
   border-left: 1px solid rgba(0, 0, 0, .25);
-  padding: 25px;
+  padding: 0 25px 25px;
 }
 
 .sources-header {
   position: relative;
   font-size: 1.2em;
   text-transform: uppercase;
-  padding-bottom: 10px;
+  padding: 25px 0 10px;
+  margin-bottom: 20px;
   border-bottom: 1px solid rgba(0, 0, 0, .25);
 }
 
 .sources-list {
   margin-top: 15px;
+}
+
+.right-sidebar h4 {
+  margin: 0 0 10px;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.right-sidebar p {
+  font-size: .9em;
 }
 
 .sources-list ul {
@@ -504,4 +515,8 @@ body .disp-col .list-group-header {
 .sources-list ul li{
   font-size: .9em;
   margin: 15px 0;
+}
+
+.ng-view-box {
+  flex: 15;
 }

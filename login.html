@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Iguana Web">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iguana Web</title>
+
+    <!-- Android Icon-->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="196x196" href="images/touch/chrome-touch-icon-196x196.png">
+
+    <!-- iOS Icon-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Iguana Web">
+
+    <!-- Windows Icon-->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+  </head>
+  <body>
+    <div class="modal fade" id="sign-in-modal" tabindex="-1" role="dialog" aria-labelledby="sign-in-modal" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="active"><a href="#sign-in" role="tab" data-toggle="tab">Sign in</a></li>
+            <li><a href="#create-account" role="tab" data-toggle="tab">Create account</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="sign-in">
+              <div class="modal-body">
+                <form role="form" method="post" action="/login">
+                  <div class="form-group">
+                    <label for="sign-in-email">Email address</label>
+                    <input type="email" class="form-control" id="sign-in-email" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="sign-in-password">Password</label>
+                    <input type="password" class="form-control" id="sign-in-password" placeholder="Password">
+                  </div>
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" checked="checked"> Remember Me
+                    </label>
+                  </div>
+                  <button type="sumbit" id="magic" class="btn btn-primary btn-block" data-dismiss="modal">Sign in</button>
+                </form>
+              </div>
+            </div> <!-- end #sign-in -->
+
+            <div class="tab-pane" id="create-account">
+              <div class="modal-body">
+                <form role="form">
+                  <div class="form-group">
+                    <label for="create-account-username">Username</label>
+                    <input type="email" class="form-control" id="create-account-username" placeholder="Enter username">
+                  </div>
+                  <div class="form-group">
+                    <label for="create-account-email">Email address</label>
+                    <input type="email" class="form-control" id="create-account-email" placeholder="Enter email">
+                  </div>
+                  <div class="form-group">
+                    <label for="create-account-password">Password</label>
+                    <input type="password" class="form-control" id="create-account-password" placeholder="Password">
+                  </div>
+                  <button type="sumbit" id="magic2" class="btn btn-primary btn-block" data-dismiss="modal">Create account</button>
+                </form>
+              </div>
+            </div> <!-- end #create-account -->
+          </div> <!-- end .tab-content -->
+
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/main.js"></script>
+  </body>
+</html>

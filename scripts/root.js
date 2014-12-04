@@ -1,6 +1,20 @@
-var root = angular.module('root', ["ngResource", "mediaPlayer"])
+var root = angular.module('root', ["ngResource", "mediaPlayer", "ngRoute"]);
 
-.controller("index", ["$scope", "$resource", function ($scope, $resource) {
+root.config(function($routeProvider) {
+  $routeProvider.when('/', {
+    templateUrl: 'browse.html',
+    controller: 'index'
+  }).when('/hello', {
+    templateUrl: 'test.html',
+    controller: 'test'
+  });
+});
+
+root.controller('test', function($scope) {
+  $scope.message = 'Hello';
+});
+
+root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
   var artists = $resource('http://iguana-staging.app.alecgorge.com/api/artists');
   var years = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years');
   var shows = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug');
@@ -51,6 +65,7 @@ var root = angular.module('root', ["ngResource", "mediaPlayer"])
                     year_slug: current_year.year, 
                     show_date: show.display_date}).$promise.then(function(result) {
       $scope.recordings = result.data[0].tracks;
+      $scope.source = result.data[0];
 
       current_venue = show.display_date + " — " + show.venue_name + ', ' + show.venue_city;
     });

@@ -118,66 +118,35 @@
           </div>
           <div class="playlists-list">
             <ul>
-              <li>Nigga Hood Rap</li>
+              <li>Rap</li>
               <li>San Diego</li>
-              <li>More hood rap</li>
+              <li>Scott's Party Mix</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="disp-col vbox col-artists-list">
-        <h3 class="list-group-item list-group-header">Artists</h3>
-        <ul class="list-group artist-list">
-          <li ng-repeat="artist in artists">
-            <a class="list-group-item" href="#" ng-click="getYears(artist, $event)">
-              {{artist.name}}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <!-- ################################################################ -->
 
-      <div class="disp-col vbox col-years-list">
-        <h3 class="list-group-item list-group-header">Years</h3>
-        <ul class="list-group year-list">
-          <li ng-repeat="year in years">
-            <a class="list-group-item" href="#" ng-click="getShows(year, $event)">{{year.year}}</a>
-          </li>
-        </ul>
-      </div>
+      <!-- <ng&#45;view></ng&#45;view> -->
+      <div ng-view></div>
 
-      <div class="disp-col vbox col-shows-list">
-        <h3 class="list-group-item list-group-header">Shows</h3>
-        <ul class="list-group show-list">
-          <li ng-repeat="show in shows">
-            <a class="list-group-item" href="#" ng-click="getRecordings(show, $event)">
-              {{show.display_date}}
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="disp-col vbox col-recording-list">
-        <h3 class="list-group-item list-group-header">Recordings</h3>
-        <ul class="list-group recording-list">
-          <li ng-repeat="recording in recordings">
-            <a class="list-group-item" href="#" ng-click="playSong(recording, $event)">
-              {{recording.title}}
-            </a>
-          </li>
-        </ul>
-      </div>
+      <!-- ################################################################ -->
 
       <div class="right-sidebar">
         <div class="sources">
-          <div class="sources-header">
-            2 Source(s)
-          </div>
-          <div class="sources-list">
-            <ul>
-              <li>Browse</li>
-              <li>Queue</li>
-            </ul>
-          </div>
+          <div class="sources-header">Source Info</div>
+          <h4>Source</h4>
+          <p>{{source.source}}</p>
+          <h4>Lineage</h4>
+          <p>{{source.lineage}}</p>
+          <h4>Transferer</h4>
+          <p>{{source.transferer}}</p>
+          <h4>Taper</h4>
+          <p>{{source.taper}}</p>
+
+          <div class="sources-header">Description</div>
+          <p>{{source.description}}</p>
         </div>
       </div>
     </div>
@@ -186,6 +155,7 @@
     <script src="scripts/bootstrap.min.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="scripts/angular-resource.min.js"></script>
+    <script src="angular-route.js"></script>
     <script src="scripts/angular-media-player.min.js"></script>
     <script src="scripts/root.js"></script>
     <script src="scripts/main.js"></script>

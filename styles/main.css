@@ -8,8 +8,8 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.row {
-  margin: 0 !important;
+.selected {
+  color: #FF9005;
 }
 
 .header {
@@ -414,10 +414,11 @@ html, body, .viewport {
   overflow-y: auto;
 }
 
-.list-group-collection {
+.list-group a {
+  color: #545454;
 }
 
-.list-group a, a:hover{
+.list-group a:hover {
   color: #000;
 }
 
@@ -443,7 +444,6 @@ body .disp-col .list-group-item {
   border-left: none ;
   border-right: none ;
   border-top: none ;
-
 }
 
 a.list-group-item.selected {

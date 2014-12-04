@@ -5,6 +5,10 @@ $(function() {
   volumeLogic();
 });
 
+$('#magic').click(function() {
+  window.location = '/loggedin.html';
+});
+
 $('#magic2').click(function() {
   window.location = '/loggedin.html';
 });

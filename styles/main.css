@@ -4,13 +4,15 @@
 }
 
 body {
-  color: #1c1c1f;
+  color: #eee;
   font-family: 'Open Sans', sans-serif;
+  background-color: #007192;
 }
 
 .header {
   height: 60px;
   width: 100%;
+  display: none !important;
 }
 
 .header-logo {
@@ -34,7 +36,7 @@ body {
   flex: 16;
   margin: 5px 25px;
   padding: 0 25px;
-  border-left: 1px solid rgba(0, 0, 0, .25);
+  border-left: 1px solid rgba(255, 255, 255, .25);
 }
 
 .header-artist {
@@ -42,7 +44,7 @@ body {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 1.2em;
-  color: rgba(0, 0, 0, .75);
+  color: rgba(255, 255, 255, .75);
 }
 
 .player-hero-first-third, .player-hero-last-third {
@@ -64,7 +66,7 @@ body {
 }
 
 .player-main-controls-wrapper, .player-progress-bar-bottom, .player-secondary-controls {
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(255, 255, 255, .25);
   height: 50px;
 }
 
@@ -102,9 +104,7 @@ body {
 .player-hero {
   color: #FFF;
   height: 150px;
-  background-image: url('../images/sunset-bg.png');
-  background-size: cover;
-  background-position: 0 180px;
+  background: #005972;
 }
 
 .player-progress-bar-bottom {
@@ -213,9 +213,26 @@ body {
 
 /******************************************************************************/
 
+.player-hero .vertical-spacer, .player-hero .player-hero-text {
+  display: none;
+}
+
+.player-hero {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.3s;
+}
+
+.player-hero.hasContent .vertical-spacer, .player-hero.hasContent .player-hero-text {
+  display: block;
+}
+
+.player-hero.hasContent {
+  height: 150px;
+}
+
 .left-sidebar {
-  background-color: #F1F2F4;
-  border-right: 1px solid rgba(0, 0, 0, .25);
+  border-right: 1px solid rgba(255, 255, 255, .25);
   padding: 25px;
 }
 
@@ -238,20 +255,33 @@ body {
   font-size: 1.2em;
   text-transform: uppercase;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
+}
+
+.menu {
+  background: #005972;
+  border-top: 1px solid rgba(255, 255, 255, .35);
 }
 
 .menu-list {
-  margin-top: 15px;
+  margin: 0;
+  background: rgba(255, 255, 255, .25);
 }
 
 .menu-list ul {
   list-style-type: none;
+  text-align: center;
+  margin: 0;
 }
 
 .menu-list ul li{
   font-size: .9em;
-  margin: 15px 0;
+  margin: 0;
+  display: inline-block;
+  padding: 1em;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
 /* this is wrong, but looks okay */
@@ -264,7 +294,7 @@ body {
   font-size: 1.2em;
   text-transform: uppercase;
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
 
 .playlists-list {
@@ -282,7 +312,7 @@ body {
 
 .fa-plus-circle {
   margin-top: 3px;
-  color: rgba(0, 0, 0, .25);
+  color: rgba(255, 255, 255, .25);
   position: absolute;
   right: 0;
 }
@@ -423,6 +453,8 @@ html, body, .viewport {
 .left-sidebar, .right-sidebar {
   flex: 3;
   overflow-y: auto;
+  background-color: #003240;
+  color: white;
 }
 
 .list-group a {
@@ -447,11 +479,11 @@ body .disp-col.col-recording-list .list-group-header {
   width: 30px;
   text-align: right;
   padding-right: 15px;
-  color: gray;
+  color: rgba(255,255,255,.40);
 }
 
 .recording-list .duration {
-  color: gray;
+  color: rgba(255,255,255,.40);
   font-size: 0.9em;
   line-height: 1.7em;
   padding-left: 15px;
@@ -469,7 +501,7 @@ body .disp-col.col-recording-list .list-group-header {
   height: auto;
   overflow-y: auto;
   margin: 0;
-  border-right: 1px solid #DDD;
+  border-right: 1px solid rgba(255,255,255,0.2);
   flex: 1;
   position: relative;
 }
@@ -479,23 +511,28 @@ body .disp-col .list-group-item {
   border-left: none ;
   border-right: none ;
   border-top: none ;
+  background: #007192;
+  color: white;
+  border-color: rgba(255,255,255,0.2);
+  cursor: pointer;
 }
 
 a.list-group-item.selected {
-  color: #FF9005;
+  background: rgba(255,255,255,0.2);
 }
 
 body .disp-col .list-group-header {
-  color: #000 !important;
+  color: white;
   text-transform: uppercase;
   padding-top: 30px;
   font-size: 1.2em;
-  background-color: #F8FAFC !important;
-  border-bottom: 1px solid rgba(0,0,0,.25);
-  border-right: 1px solid rgba(0,0,0,.10);
+  background-color: #005972 !important;
+  /*border-bottom: 1px solid rgba(255, 255, 255, .25);
+  border-right: 1px solid rgba(255, 255, 255, .10);*/
   margin: 0;
   padding-bottom: 10px;
   box-sizing: border-box;
+  min-height: 60px;
 }
 
 .col-artists-list .list-group-item {
@@ -514,9 +551,8 @@ body .disp-col .list-group-header {
 }
 
 .right-sidebar {
-  background-color: #F1F2F4;
   bottom: 0;
-  border-left: 1px solid rgba(0, 0, 0, .25);
+  border-left: 1px solid rgba(255, 255, 255, .25);
   padding: 0 25px 25px;
 }
 
@@ -526,7 +562,7 @@ body .disp-col .list-group-header {
   text-transform: uppercase;
   padding: 25px 0 10px;
   margin-bottom: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
 }
 
 .sources-list {

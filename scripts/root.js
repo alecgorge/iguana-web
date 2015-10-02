@@ -57,10 +57,10 @@ root.controller('test', function($scope) {
 });
 
 root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
-  var artists = $resource('http://iguana-staging.app.alecgorge.com/api/artists');
-  var years = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years');
-  var shows = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug');
-  var recordings = $resource('http://iguana-staging.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug/shows/:show_date');
+  var artists = $resource('http://iguana.app.alecgorge.com/api/artists');
+  var years = $resource('http://iguana.app.alecgorge.com/api/artists/:artist_slug/years');
+  var shows = $resource('http://iguana.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug');
+  var recordings = $resource('http://iguana.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug/shows/:show_date');
 
   var current_artist;
   var current_year;

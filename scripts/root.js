@@ -62,37 +62,91 @@ root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
   var shows = $resource('http://iguana.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug');
   var recordings = $resource('http://iguana.app.alecgorge.com/api/artists/:artist_slug/years/:year_slug/shows/:show_date');
 
-  var current_artist;
-  var current_year;
-  var current_venue;
-  var total_time_seconds;
+  $scope.current_artist;
+  $scope.current_year;
+  $scope.current_venue;
+  $scope.total_time_seconds;
 
   window.iguanaScope = $scope;
+  
+  $scope.$watch('current_artist', function (n, old) {
+    $scope.getYears();
+    window.localStorage['active_artist_slug'] = n.slug;  
+  });
+  
+  $scope.$watch('current_year', function (newYear, old) {
+    $scope.getShows();
+    window.localStorage['active_year'] = newYear.year;  
+  });
+  
+  var lastActiveYear = function () {
+    var lastSelectedYear = window.localStorage['active_year'];
+    
+    if(!lastSelectedYear) {
+      return null;
+    }
+    
+    return _.find($scope.years, function (year) {
+      return year.year == lastSelectedYear;
+    });
+  }
+  
+  var lastActiveArtist = function () {
+    var lastSelectedArtistSlug = window.localStorage['active_artist_slug'];
+    
+    if(!lastSelectedArtistSlug) {
+      return null;
+    }
+    
+    return _.find($scope.artists, function (artist) {
+      return artist.slug == lastSelectedArtistSlug;
+    });
+  }
 
   artists.get().$promise.then(function(result) {
     $scope.artists = result.data;
+    $scope.artists.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+    
+    if(lastActiveArtist()) {
+      $scope.current_artist = lastActiveArtist();
+    }
+    else {
+      $scope.current_artist = _.sample($scope.artists);    
+    }
   });
 
-  $scope.getYears = function(artist, $event) {
-    selectElement($event.target);
+  $scope.getYears = function() {
+    // selectElement($event.target);
+    var artist = $scope.current_artist;
 
     years.get({artist_slug: artist.slug}).$promise.then(function(result) {
-      current_artist = artist;
+      $scope.current_artist = artist;
+
       $scope.years = result.data;
-      $scope.artist = current_artist.name;
+
+      $scope.artist = $scope.current_artist.name;
 
       // reset other lists
       $scope.shows = [];
       $scope.recordings = [];
+
+      if(lastActiveYear()) {
+        $scope.current_year = lastActiveYear();
+      }
+      else {
+        $scope.current_year = _.sample($scope.years);
+      }
     });
   };
 
-  $scope.getShows = function(year, $event) {
-    selectElement($event.target);
+  $scope.getShows = function() {
+    // selectElement($event.target);
+    var year = $scope.current_year;
 
-    shows.get({artist_slug: current_artist.slug, 
+    shows.get({artist_slug: $scope.current_artist.slug, 
                year_slug: year.year}).$promise.then(function(result) {
-      current_year = year;
       $scope.shows = result.data.shows;
 
       // reset other lists
@@ -101,24 +155,31 @@ root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
   };
 
   $scope.getRecordings = function(show, $event) {
-    selectElement($event.target);
+    $scope.current_show = show;
 
-    recordings.get({artist_slug: current_artist.slug, 
-                    year_slug: current_year.year, 
+    recordings.get({artist_slug: $scope.current_artist.slug, 
+                    year_slug: $scope.current_year.year, 
                     show_date: show.display_date}).$promise.then(function(result) {
-      $scope.recordings = result.data[0].tracks;
-      $scope.source = result.data[0];
+      $scope.recordings = result.data;
+      
+      $scope.recordings.sort(function (a, b) {
+        return b.weighted_avg - a.weighted_avg;
+      })
+      
+      $scope.current_source = result.data;
 
-      current_venue = show.display_date + " — " + show.venue_name + ', ' + show.venue_city;
+      $scope.current_venue = show.display_date + " — " + show.venue_name + ', ' + show.venue_city;
     });
   };
+  
+  $scope.selectRecording = function(recording, $event) {
+    $scope.current_source = recording;
+  }
 
   $scope.playSong = function(recording, $event) {
-    selectElement($event.target);
-
-
+    $scope.current_track = recording;
     $scope.title = recording.title;
-    total_time_seconds = recording.length;
+    $scope.total_time_seconds = recording.length;
 
     if(!$scope.audio1.playing) {
       $scope.audio1.load([{ src: recording.file, type: 'audio/mp3' }, true]);
@@ -132,7 +193,7 @@ root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
       }, 100);
     }
 
-    $scope.venue = current_venue;
+    $scope.venue = $scope.current_venue;
     var length = recording.length;
     var min = Math.floor(length/60);
     var sec = pad(length % 60, 2);
@@ -149,7 +210,7 @@ root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
       $scope.current_time = '';
     }
 
-    $scope.current_time_percentage = newValue / total_time_seconds * 100 + '%';
+    $scope.current_time_percentage = newValue / $scope.total_time_seconds * 100 + '%';
   });
 
   $scope.$watch("audio1.volume", function (newValue) {
@@ -165,7 +226,7 @@ root.controller("index", ["$scope", "$resource", function ($scope, $resource) {
   }
 
   $scope.seekTo = function(timePercent) {
-    $scope.audio1.seek(timePercent * total_time_seconds);
+    $scope.audio1.seek(timePercent * $scope.total_time_seconds);
   }
 
 }]);
@@ -174,9 +235,4 @@ function pad(n, width, z) {
   z = z || '0';
   n = n + '';
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-}
-
-function selectElement(target) {
-  $(target).parent().parent().children().children().removeClass('selected');
-  $(target).addClass('selected');
 }

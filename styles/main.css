@@ -65,7 +65,9 @@ body {
   padding-top: 15px;
 }
 
-.player-main-controls-wrapper, .player-progress-bar-bottom, .player-secondary-controls {
+.player-main-controls-wrapper,
+.player-progress-bar-bottom,
+.player-secondary-controls {
   background-color: rgba(255, 255, 255, .25);
   height: 50px;
 }
@@ -86,7 +88,7 @@ body {
   font-size: .9em;
   border-radius: 50%;
   padding-top: 3px;
-  padding-left: 4px;
+  padding-left: 2px;
   border: 1px solid #FFF;
 }
 
@@ -95,7 +97,7 @@ body {
   font-size: .9em;
   border-radius: 50%;
   padding-top: 3px;
-  padding-left: 2px;
+  padding-left: 0px;
   border: 1px solid #FFF;
 }
 
@@ -103,7 +105,7 @@ body {
 
 .player-hero {
   color: #FFF;
-  height: 150px;
+  /*height: 150px;*/
   background: #005972;
 }
 
@@ -111,12 +113,12 @@ body {
   padding-top: 17px;
 }
 
-.player-hero-text, .player-progress-bar-bottom {
-  padding: 0 25px;
+.player-hero-text {
+  padding: 10px 25px;
 }
 
-.player-hero-text {
-  margin-top: 25px;
+.player-progress-bar-bottom {
+  padding: 0 25px;
 }
 
 .player-hero-song {
@@ -227,8 +229,12 @@ body {
   display: block;
 }
 
+.vertical-spacer, .player-hero-text {
+  background-color: rgba(255, 255, 255, .25);
+}
+
 .player-hero.hasContent {
-  height: 150px;
+  height: 125px;
 }
 
 .left-sidebar {
@@ -275,13 +281,25 @@ body {
 }
 
 .menu-list ul li{
-  font-size: .9em;
   margin: 0;
   display: inline-block;
-  padding: 1em;
+  padding: 0 1em;
+}
+
+.menu-list ul li a {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  padding: 1em 0;
+  padding-bottom: 0.25em;
   text-transform: uppercase;
   font-size: 1.2em;
-  cursor: pointer;
+  margin-bottom: 0.75em;
+  border-bottom: 2px transparent solid;
+}
+
+.menu-list ul li a:hover {
+  border-color: white;
 }
 
 /* this is wrong, but looks okay */
@@ -465,15 +483,15 @@ html, body, .viewport {
   color: #000;
 }
 
-.recording-list.list-group {
+.recording-track-list.list-group {
   border: 0;
 }
 
-body .disp-col.col-recording-list .list-group-header {
+body .disp-col.col-recording-track-list .list-group-header {
   border-right: 0;
 }
 
-.recording-list .track {
+.recording-track-list .track {
   font-size: 0.9em;
   line-height: 1.7em;
   width: 30px;
@@ -482,7 +500,7 @@ body .disp-col.col-recording-list .list-group-header {
   color: rgba(255,255,255,.40);
 }
 
-.recording-list .duration {
+.recording-track-list .duration {
   color: rgba(255,255,255,.40);
   font-size: 0.9em;
   line-height: 1.7em;
@@ -495,6 +513,20 @@ body .disp-col.col-recording-list .list-group-header {
 
 .pull-right {
   float: right;
+}
+
+.kv-key {
+  font-size: .8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.recording-list .list-group-item .row {
+  margin-top: 6px;
+}
+
+.clear {
+  clear:both;
 }
 
 .list-group {
@@ -517,7 +549,11 @@ body .disp-col .list-group-item {
   cursor: pointer;
 }
 
-a.list-group-item.selected {
+.recording-list .list-group-item {
+  margin-top:-20px;
+}
+
+html body .list-group-item.selected {
   background: rgba(255,255,255,0.2);
 }
 

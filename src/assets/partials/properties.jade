@@ -1,0 +1,46 @@
+h3 Properties
+	a.btn.btn-primary.pull-right(href="#/properties/create") Create New Property
+br
+.row
+	.col-xs-6
+		.list-group
+			a(ng-repeat="property in properties", href="#/properties/{{property._id}}", ng-class="{active: currentProperty._id == property._id}").list-group-item
+				h4.list-group-item-heading {{ property.address }}
+				p.list-group-item-text
+					span.label.label-success(ng-if="events.currentUserHasNotificationsEnableForProperty($index)")
+						| Notifications on
+					span.label.label-default(ng-if="!events.currentUserHasNotificationsEnableForProperty($index)")
+						| Notifications off
+					|  
+					span.label.label-default {{ property.names.length }} homeowners
+	.col-xs-6
+		form.device-details(ng-show="currentProperty != null", ng-submit="events.save()")
+			h3 {{ currentProperty.address }}
+			br
+			.form-group
+				label.control-label(for="address") Address
+				input#address.form-control(name="address", type="text", ng-model="currentProperty.address")
+			.checkbox
+				label
+					input#push(name="push", type="checkbox", ng-model="currentPropertyPushNotificationsEnabled")
+					|  
+					strong Push Notifications
+				p.help-text This enables or disables push notifications being sent to your mobile device. This doesn't
+					| affect homeowners' settings.
+			.form-group
+				label.control-label(for="push") Homeowners
+				.row
+					.col-sm-6
+						div(ng-repeat="name in currentProperty.names track by $index").spaced
+							.input-group
+								.input-group-btn
+									a(href="", ng-click="events.removeHomeowner($index)").btn &times;
+								input.form-control(name="push[{{$index}}]", type="text", ng-model="currentProperty.names[$index]")
+						
+						a(href="", ng-click="events.addHomeowner()").btn + Add Homeowner
+					.col-sm-6
+						div(ng-repeat="ph in currentProperty.phoneNumbers track by $index").spaced
+							input.form-control(name="push[{{$index}}]", type="tel", skip-util-script-download, international-phone-number, only-countries="us", ng-model="currentProperty.phoneNumbers[$index]")
+			.form-group
+				button.btn.btn-primary.pull-right(type="submit", ng-show="!submitting") Save
+				button.btn.btn-primary.pull-right(type="submit", ng-show="submitting", disabled="disabled") Saving...

@@ -1,0 +1,14 @@
+h3 Showing History
+
+table.table.table-hover
+	thead
+		tr
+			th Date
+			th Time
+			th Property
+	tbody
+		tr(ng-repeat="update in updates")
+			td(width=130) {{update.date | amUtc | amDateFormat:'MMMM Do'}}
+			td(width=130) {{update.date | amUtc | amDateFormat:'h:mm:ss a'}}
+			td
+				a(href="#/properties/{{update.property._id}}") {{update.property ? update.property.address : ""}}

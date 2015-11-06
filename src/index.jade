@@ -1,0 +1,94 @@
+doctype html
+html(lang='en', ng-app="relisten")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    
+    // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='/assets/img/favicon.ico')
+    
+    title Relisten
+    
+    // build:css assets/app.css 
+    link(rel='stylesheet', type='text/css', href='/assets/components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', type='text/css', href='/assets/css/app.css')
+    // endbuild 
+    
+    // HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
+    //if lt IE 9
+      script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+      script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+          
+  body
+    nav.navbar.navbar-default
+      .container-fluid
+        .collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='#')
+                | Link 
+                span.sr-only (current)
+            li
+              a(href='#') Link
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Dropdown 
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='#') Action
+                li
+                  a(href='#') Another action
+                li
+                  a(href='#') Something else here
+                li.divider(role='separator')
+                li
+                  a(href='#') Separated link
+                li.divider(role='separator')
+                li
+                  a(href='#') One more separated link
+          form.navbar-form.navbar-left(role='search')
+            .form-group
+              input.form-control(type='text', placeholder='Search')
+            button.btn.btn-default(type='submit') Submit
+          ul.nav.navbar-nav.navbar-right
+            li
+              a(href='#') Link
+            li.dropdown
+              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
+                | Dropdown 
+                span.caret
+              ul.dropdown-menu
+                li
+                  a(href='#') Action
+                li
+                  a(href='#') Another action
+                li
+                  a(href='#') Something else here
+                li.divider(role='separator')
+                li
+                  a(href='#') Separated link
+
+    .container
+            
+      section#content(ng-view)
+        
+      footer.footer
+        p © Alec Gorge 2015
+      
+    // build:js assets/app.js 
+    script(src='/assets/components/rollbar/dist/rollbar.snippet.js')
+    script(src='/assets/components/jquery/dist/jquery.js')
+    script(src='/assets/components/moment/moment.js')
+    script(src='/assets/components/angular/angular.js')
+    script(src='/assets/components/angular-resource/angular-resource.js')
+    script(src='/assets/components/angular-moment/angular-moment.js')
+    script(src='/assets/components/angular-route/angular-route.js')
+    script(src='/assets/components/angular-duration-format/angular-duration-format.js')
+    script(src='/assets/components/angular-bootstrap/ui-bootstrap.js')
+
+    script(src='/assets/js/Application.js')
+    // endbuild 

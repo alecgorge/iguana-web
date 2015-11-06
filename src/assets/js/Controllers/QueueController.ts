@@ -5,12 +5,11 @@
 module relisten {
     'use strict';
 	
-	export interface IPlaybackScope extends ng.IScope {
-		audioTag : HTMLAudioElement;
+	export interface IQueueScope extends ng.IScope {
 		audioPlayer : AGAudioPlayer;
 	}
-	
-	export class PlaybackController {
+
+	export class QueueController {
 		public static $inject = [
 			'$scope',
 			'$rootScope',
@@ -20,16 +19,11 @@ module relisten {
 		// dependencies are injected via AngularJS $injector
 		// controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
 		constructor(
-			private $scope: IPlaybackScope,
+			private $scope: IQueueScope,
 			private $rootScope: IRelistenRootScope,
 			private AGAudioPlayer: AGAudioPlayer
 		) {
-			$scope.audioTag = AGAudioPlayer.audioTag;
-			$scope.audioPlayer = AGAudioPlayer;
-			
-			setInterval(() => {
-				$scope.$apply();
-			}, 500);
+			this.$scope.audioPlayer = AGAudioPlayer;
 		}
 	}
 }

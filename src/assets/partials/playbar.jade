@@ -1,26 +1,26 @@
 .row(ng-controller="PlaybackController")
 	.col-xs-2.center
 		.btn-group
-			button(type="button").btn.btn-default
+			button(type="button", ng-click="audioPlayer.previous()").btn.btn-default
 				i.glyphicon.glyphicon-backward
-			button(type="button", ng-show="!isPlaying()").btn.btn-default
+			button(type="button", ng-show="audioTag.paused", ng-click="audioPlayer.play()").btn.btn-default
 				i.glyphicon.glyphicon-play
-			button(type="button", ng-show="isPlaying()").btn.btn-default
+			button(type="button", ng-show="!audioTag.paused", ng-click="audioPlayer.pause()").btn.btn-default
 				i.glyphicon.glyphicon-pause
-			button(type="button").btn.btn-default
+			button(type="button", ng-click="audioPlayer.next()").btn.btn-default
 				i.glyphicon.glyphicon-forward
 	.col-xs-7.center
 		.btn-group.player
-			.btn.endcap 0:00
+			.btn.endcap {{audioTag.currentTime | humanizeDuration:true }}
 			.btn.filler
-				input(type="range")
-			.btn.endcap 0:00
+				input(type="range", min="0", max="{{audioTag.duration}}", step=".25", value="{{audioTag.currentTime}}")
+			.btn.endcap {{audioTag.duration | humanizeDuration:true }}
 	.col-xs-3.center
 		.btn-group
-			button(type="button").btn.btn-default.small-caps queue
+			a(href="/queue").btn.btn-default.small-caps queue
 			button(type="button").btn.btn-default
 				// i.glyphicon.glyphicon-volume-off
 				i.glyphicon.glyphicon-volume-down
 				// i.glyphicon.glyphicon-volume-up
 			.btn.btn-default.no-hover
-				input(type="range", min="0", max="1", step="0.01" value="1")
+				input(type="range", min="0", max="1", step="0.01", ng-model="audioTag.volume")

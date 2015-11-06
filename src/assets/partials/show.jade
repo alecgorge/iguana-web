@@ -64,7 +64,8 @@
 				tr(ng-repeat="track in current_show.tracks")
 					td(data-value="{{track.track}}") {{track.track}}
 					td(data-value="{{track.title}}").nopadding
-						a(href='#!/years/{{current_show.year}}/shows/{{current_show.display_date}}/sources/{{current_show.id}}/tracks/{{track.id}}/{{track.slug}}', ng-click="playTrack($event, $index)").no-follow.block {{track.title}}
+						// /{{$root.currentArtist.slug}}/{{current_show.year}}/{{current_show.display_date | limitTo:2:5}}/{{current_show.display_date | limitTo:2:8}}-{{current_show_index}}/{{track.slug}}
+						a(href='', ng-click="events.playTrackAtIndex($index)").no-follow.block {{track.title}}
 					td(data-value="{{track.length}}") {{track.length | humanizeDuration:true}}
 
 		.review-container

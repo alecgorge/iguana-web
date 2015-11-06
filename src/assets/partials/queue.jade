@@ -1,0 +1,19 @@
+.row
+	.col-xs-12
+		h1 You have {{audioPlayer.tracks.length}} tracks in your playback queue
+
+		ol.breadcrumb
+			li.active Playback Queue
+		
+		table.table.table-striped.table-hover
+			thead
+				th #
+				th Title
+				th Length 
+			tbody
+				tr(ng-repeat="track in audioPlayer.tracks")
+					td {{$index}}
+					td.nopadding
+						a(href='/{{track.artist.slug}}/{{track.recording.year}}/{{track.recording.display_date | limitTo:2:5}}/{{track.recording.display_date | limitTo:2:8}}').no-follow.block {{track.title}}  
+							small &mdash; {{track.recording.display_date}}
+					td {{track.length | humanizeDuration:true}}

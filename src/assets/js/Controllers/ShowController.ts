@@ -8,6 +8,7 @@ module relisten {
 	export interface IShowScope extends ng.IScope {
 		shows: Recording[];
 		current_show: Recording;
+		current_show_index: number;
 		
 		events: ShowController;
 		
@@ -19,6 +20,7 @@ module relisten {
 		year: string;
 		month: string;
 		datesource: string;
+		trackSlug: string;
 	}
 	
 	export class ShowController {
@@ -27,7 +29,8 @@ module relisten {
 			'$location',
 			'$rootScope',
 			'$routeParams',
-			'IguanaAPI'
+			'IguanaAPI',
+			'AGAudioPlayer'
 		];
 		
 		// dependencies are injected via AngularJS $injector
@@ -37,10 +40,12 @@ module relisten {
 			private $location: ng.ILocationService,
 			private $rootScope: IRelistenRootScope,
 			private $routeParams: IShowRouteParams,
-			private IguanaAPI: IguanaAPI
+			private IguanaAPI: IguanaAPI,
+			private AGAudioPlayer: AGAudioPlayer
 		) {
 			$rootScope.setCurrentArtist($routeParams.artist);
 			$scope.show_all_sources = false;
+			$scope.events = this;
 			
 			let parts = $routeParams.datesource.split('-');
 			let day = parts[0];
@@ -48,12 +53,34 @@ module relisten {
 			let date = `${$routeParams.year}-${$routeParams.month}-${day}`
 			IguanaAPI.show($routeParams.artist, $routeParams.year, date).success(show => {
 				this.$scope.shows = show.data;
-				this.$scope.current_show = this.$scope.shows[sourceIndex];
+				this.changeSource(sourceIndex);
+				
+				if($routeParams.trackSlug) {
+					this.playTrackAtIndex(this.$scope.current_show.tracks.map(track => {
+						return track.slug;
+					}).indexOf($routeParams.trackSlug));
+				}
 			});
 		}
 		
 		public changeSource(sourceIdx: number) {
 			this.$scope.current_show = this.$scope.shows[sourceIdx];
+			this.$scope.current_show_index = sourceIdx;
+		}
+		
+		public playTrackAtIndex(trackIdx: number) {
+			let tracks: Track[] = [];
+			for(var i = trackIdx; i < this.$scope.current_show.tracks.length; i++) {
+				tracks.push(this.$scope.current_show.tracks[i]);
+			}
+			
+			this.AGAudioPlayer.clearPlaylist();
+			this.AGAudioPlayer.addTracksFromRecordingAndArtist(
+				tracks,
+				this.$scope.current_show,
+				this.$rootScope.currentArtist
+			);
+			this.AGAudioPlayer.playAtIndex(0);
 		}
 	}
 }

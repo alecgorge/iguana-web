@@ -1,10 +1,12 @@
 /// <reference path='../../../typings/tsd.d.ts' />
+/// <reference path='Controllers/PlaybackController.ts' />
 /// <reference path='Controllers/HomeController.ts' />
 /// <reference path='Controllers/YearController.ts' />
 /// <reference path='Controllers/ShowController.ts' />
 /// <reference path='Controllers/VenueController.ts' />
 /// <reference path='Controllers/TopController.ts' />
 /// <reference path='Controllers/VenuesController.ts' />
+/// <reference path='Controllers/QueueController.ts' />
 /// <reference path='Services/IguanaAPI.ts' />
 /// <reference path='Services/AGAudioPlayer.ts' />
 /// <reference path='Filters/RelistenFilters.ts' />
@@ -47,6 +49,11 @@ module relisten {
 				templateUrl: '/assets/partials/artists.html',
 				controllerAs: 'vm'
 			})
+			.when('/queue', {
+				controller: QueueController,
+				templateUrl: '/assets/partials/queue.html',
+				controllerAs: 'vm'
+			})
 			.when('/:artist', {
 				controller: HomeController,
 				templateUrl: '/assets/partials/home.html',
@@ -73,6 +80,11 @@ module relisten {
 				controllerAs: 'vm'
 			})
 			.when('/:artist/:year/:month/:datesource', {
+				controller: ShowController,
+				templateUrl: '/assets/partials/show.html',
+				controllerAs: 'vm'
+			})
+			.when('/:artist/:year/:month/:datesource/:track', {
 				controller: ShowController,
 				templateUrl: '/assets/partials/show.html',
 				controllerAs: 'vm'
@@ -139,6 +151,7 @@ module relisten {
 				.filter('humanizeDuration', HumanizeTime)
 				.filter('round', RoundFilter)
 				.factory('AGAudioPlayer', AGAudioPlayerFactory)
+				.controller('PlaybackController', PlaybackController)
 				.config(router)
 				.run(run)
 				;

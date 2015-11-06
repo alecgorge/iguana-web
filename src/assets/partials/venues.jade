@@ -1,0 +1,21 @@
+.row
+	.col-xs-12
+		h1 {{venues.length}} Venues 
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li
+				a(href="/{{$root.currentArtist.slug}}") {{$root.currentArtist.name}}
+			li.active Venues
+		table.table.table-striped.table-hover.sortable
+			thead
+				th Name
+				th City
+				th(data-defaultsort='desc') Show Count
+			tbody
+				tr(ng-repeat="venue in venues")
+					td(data-value="{{venue.name}}").nopadding
+						a(href='/{{$root.currentArtist.slug}}/venues/{{venue.id}}').block {{venue.name}}
+					td(data-value="{{venue.city}}") {{venue.city}}
+					td(data-value="{{venue.show_count}}") {{venue.show_count}}

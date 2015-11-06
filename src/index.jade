@@ -4,6 +4,7 @@ html(lang='en', ng-app="relisten")
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
+    base(href="/")
     
     // The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags
     meta(name='description', content='')
@@ -23,71 +24,53 @@ html(lang='en', ng-app="relisten")
       script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
           
   body
-    nav.navbar.navbar-default
-      .container-fluid
+    nav.navbar.navbar-default.navbar-fixed-top
+      .container
         .collapse.navbar-collapse
+          .navbar-header
+            a.navbar-brand(href="/")
+              img(alt="Relisten", src="/assets/img/relisten-circular-logo.png", style="margin-top: -5px")
+            a.navbar-brand(href="/") All Artists
           ul.nav.navbar-nav
-            li.active
-              a(href='#')
-                | Link 
-                span.sr-only (current)
-            li
-              a(href='#') Link
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                | Dropdown 
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href='#') Action
-                li
-                  a(href='#') Another action
-                li
-                  a(href='#') Something else here
-                li.divider(role='separator')
-                li
-                  a(href='#') Separated link
-                li.divider(role='separator')
-                li
-                  a(href='#') One more separated link
-          form.navbar-form.navbar-left(role='search')
+            li.active(ng-show="$root.currentArtist")
+              a(href='/{{$root.currentArtist.slug}}') {{$root.currentArtist.name}} 
+            li(ng-show="$root.currentArtist")
+              a(href='/{{$root.currentArtist.slug}}') Years
+            li(ng-show="$root.currentArtist")
+              a(href='/{{$root.currentArtist.slug}}/venues') Venues
+            li(ng-show="$root.currentArtist")
+              a(href='/{{$root.currentArtist.slug}}/top') Top Shows
+          form.navbar-form.navbar-right(role='search')
             .form-group
               input.form-control(type='text', placeholder='Search')
-            button.btn.btn-default(type='submit') Submit
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='#') Link
-            li.dropdown
-              a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-haspopup='true', aria-expanded='false')
-                | Dropdown 
-                span.caret
-              ul.dropdown-menu
-                li
-                  a(href='#') Action
-                li
-                  a(href='#') Another action
-                li
-                  a(href='#') Something else here
-                li.divider(role='separator')
-                li
-                  a(href='#') Separated link
+              a(href='#') Live
+            li
+              a(href='#') Today
+            li
+              a(href='#') About
 
     .container
-            
       section#content(ng-view)
-        
+      
       footer.footer
         p © Alec Gorge 2015
+
+    nav.navbar.navbar-default.navbar-fixed-bottom#playbar
+      .container
+        include ./assets/partials/playbar.jade        
       
     // build:js assets/app.js 
-    script(src='/assets/components/rollbar/dist/rollbar.snippet.js')
     script(src='/assets/components/jquery/dist/jquery.js')
     script(src='/assets/components/moment/moment.js')
     script(src='/assets/components/angular/angular.js')
     script(src='/assets/components/angular-resource/angular-resource.js')
     script(src='/assets/components/angular-moment/angular-moment.js')
     script(src='/assets/components/angular-route/angular-route.js')
-    script(src='/assets/components/angular-duration-format/angular-duration-format.js')
+    script(src='/assets/components/angular-sanitize/angular-sanitize.js')
+    script(src='/assets/components/angular-duration-format/dist/angular-duration-format.js')
+    script(src='/assets/components/angular-soundmanager2/dist/angular-soundmanager2.js')
     script(src='/assets/components/angular-bootstrap/ui-bootstrap.js')
 
     script(src='/assets/js/Application.js')

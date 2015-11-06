@@ -56,8 +56,14 @@ gulp.task('image', function () {
 
 gulp.task('express', function() {
     app.use(express.static(path.resolve('./dist')));
+    app.use(function (req, res, next) {
+        if(req.accepts('html')) {
+            res.sendFile('index.html', {root: './dist'});
+            return;
+        }
+    });
     app.listen(process.env.PORT || 1377);
-    gutil.log('Listening on port: ' + (process.env.PORT || 1337));
+    gutil.log('Listening on port: ' + (process.env.PORT || 1377));
 });
 
 gulp.task('watch', ['js', 'image', 'css', 'templates', 'express'], function() {

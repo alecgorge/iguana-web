@@ -1,98 +1,102 @@
 // http://getbootstrap.com/getting-started/#support-ie10-width
 @-ms-viewport       { width: device-width; }
 
-/* Space out content a bit */
 body
-  padding-top 20px 
-  padding-bottom 20px 
+  padding 80px 0
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer
-  padding-right 15px 
-  padding-left 15px 
+.min-width-160
+  min-width 160px
 
-/* Custom page header */
-.header
-  padding-bottom 0px 
-  margin 0px
+.min-width-90
+  min-width 90px
 
-/* Make the masthead heading the same height as the navigation */
-  h3
-    margin-top 0 
-    margin-bottom 0 
-    line-height 36px
+.block
+  display block
+  
+.nopadding
+  padding 0 !important
+  
+  .block
+    padding 8px
+
+footer
+  text-align center
+
+.reviews
+	list-style none
+	padding 0
+
+	li
+		list-style none
+		margin-bottom 30px
+
+	h4
+		small
+			float right
+			padding-top 2px
+
+	cite
+		font-style italic
+
+	blockquote
+		border 0
+		padding 0
+		margin 0
+
+.prewrap
+  white-space pre-wrap
+
+#sources-menu
+  
+  small
+    display block
+    margin-right 100px
+    white-space normal
     
-    #logo
-      margin-left 15px
-  
-  .status
-    border 1px solid #e5e5e5
-    border-width 1px 0
-    margin 20px 0 0 0
-    padding 10px 15px
+    color black
 
-section#content
-  margin 30px 0
-  
+  .active small
+    color white
+    
 .center
   text-align center
+  padding 7px 0
 
-.spaced
-  margin-bottom 7px
-
-/* Custom page footer */
-.footer
-  padding-top 19px 
-  color #777 
-  border-top 1px solid #e5e5e5
-  text-align center
-
-/* Customize container */
-@media (min-width 860px) {
-  .container {
-    max-width 860px
-  } 
+#playbar
+  min-height 0px
+  padding 15px 0
   
-  .container-narrow > hr {
-  	margin 30px 0 
-  }
-}
-
-/* Main marketing message and sign up button */
-.jumbotron
-  text-align center 
-  border-bottom 1px solid #e5e5e5 
-
+  input[type=range]
+    margin-top 3px
+  
+  .player
+    display block
+    
+    .btn
+      float none
+      
+      &:hover
+  
+  .filler
+    width 81%
+    left -4px
+    
+  .endcap
+    width 9%
+        
+    &:last-child
+      left -8px
+  
   .btn
-    padding 14px 24px 
-    font-size 21px 
-
-/* Supporting marketing content */
-.marketing
-  margin 40px 0 
-
-  p + h4
-   margin-top 28px 
-
-/* Responsive Portrait tablets and up */
-@media screen and (min-width 768px) {
-  /* Remove the padding we set earlier */
-  .header,
-  .marketing,
-  .footer {
-    padding-right 0 
-    padding-left 0
-  } 
+    line-height 20px
+    min-height 34px
   
-  /* Space out the masthead */
-  .header {
-    margin-bottom 30px
-  } 
+  .no-hover:hover
+    
   
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom 0
-  } 
-}
+  .center
+    padding inherit
+
+.small-caps
+  text-transform uppercase
+  font-size 80%

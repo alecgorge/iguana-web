@@ -1,0 +1,24 @@
+.row
+	.col-xs-12
+		h1 Shows at {{venue.name}} 
+			small {{venue.city}}
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li
+				a(href="/{{$root.currentArtist.slug}}") {{$root.currentArtist.name}}
+			li
+				a(href='/{{$root.currentArtist.slug}}/venues') Venues
+			li.active {{venue.name}} 
+		table.table.table-striped.table-hover.sortable
+			thead
+				th
+				th(data-defaultsort='asc') Date
+				th Recordings
+				th Duration
+				th Avg. Rating
+				th Reviews
+			tbody
+				tr(ng-repeat="show in venue.shows")
+					include ./show_cells_partial_without_venue.jade

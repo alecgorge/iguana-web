@@ -16,6 +16,12 @@
     },
     "angularjs/angular-resource.d.ts": {
       "commit": "3191f6e0088eee07c4d8fd24e4d27a40a60d9eb9"
+    },
+    "moment/moment.d.ts": {
+      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "35989a3ab4834b8e8b2b56788f1d4fc46a25dc8d"
     }
   }
 }

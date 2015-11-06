@@ -1,0 +1,11 @@
+.row
+	.col-xs-12
+		h1 {{$root.recordingCount}} recordings by {{$root.artists.length}} bands
+
+		ol.breadcrumb
+			li.active Artists
+			
+		.list-group
+			a(ng-repeat="artist in $root.artists", href="/{{artist.slug}}").list-group-item
+				| {{artist.name}}
+				span.badge {{artist.recording_count}} 

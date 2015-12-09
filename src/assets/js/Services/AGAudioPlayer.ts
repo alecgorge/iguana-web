@@ -10,27 +10,61 @@ module relisten {
 		public tracks: PlaybackTrack[] = [];
 		private currentIndex = -1;
 		public currentTrack : PlaybackTrack = null;
+		public IguanaAPI: IguanaAPI;
 		
 		// dependencies are injected via AngularJS $injector
 		// controller's name is registered in Application.ts and specified from ng-controller attribute in index.html
 		constructor(
+			
 		) {
 			this.audioTag = new Audio();
 			
 			this.audioTag.addEventListener("ended", this.audioTagEnded);
-			this.audioTag.addEventListener("loadedmetadata", this.metadataLoaded);	
+			this.audioTag.addEventListener("loadedmetadata", this.metadataLoaded);
+			
+			this.loadQueue();	
 		}
 		
-		private audioTagEnded(ev: Event) {
+		private audioTagEnded = (ev: Event) => {
 			this.next();
 		}
 		
-		private metadataLoaded(ev: Event) {
+		private metadataLoaded = (ev: Event) => {
 			
+		}
+		
+		public fixCurrentIndex() {
+			var i = 0;
+			for(var t of this.tracks) {
+				if(t.file == this.audioTag.src) {
+					this.currentIndex = i;
+					break;
+				}
+				i++;
+			}
+			this.saveQueue();
+		}
+		
+		public loadQueue() {
+			if(window.localStorage["agaudioplayer_queue"]) {
+				let ob = JSON.parse(window.localStorage["agaudioplayer_queue"]);
+				
+				this.tracks = ob["tracks"];
+				this.playAtIndex(ob["currentIndex"]);
+				this.pause();
+			}
+		}
+		
+		public saveQueue() {
+			window.localStorage["agaudioplayer_queue"] = JSON.stringify({
+				tracks: this.tracks,
+				currentIndex: this.currentIndex
+			});
 		}
 		
 		public clearPlaylist() {
 			this.tracks.splice(0, this.tracks.length);
+			this.saveQueue();
 		}
 		
 		public addPlaybackTracks(pt: PlaybackTrack[]) {
@@ -44,14 +78,17 @@ module relisten {
 			this.addPlaybackTracks(t.map(v => {
 				let pt = <PlaybackTrack>v;
 				pt.artist = artist;
-				pt.recording = rec;
+				
+				pt.recording = jQuery.extend(true, {}, rec);
 				
 				return pt;
 			}));
+			this.saveQueue();
 		}
 		
 		public removeTrackAtIndex(idx: number) {
 			this.tracks.splice(idx, 1);
+			this.saveQueue();
 		}
 		
 		public nextIndex() {
@@ -90,6 +127,10 @@ module relisten {
 			
 			this.audioTag.src = cur.file;
 			this.audioTag.play();
+			
+			if(this.IguanaAPI) {
+				this.IguanaAPI.post(this.currentTrack);
+			}
 		}
 		
 		// playback management
@@ -114,11 +155,11 @@ module relisten {
 		}
 		
 		public canPrevious() {
-			return this.currentIndex - 1 < 0;
+			return this.currentIndex - 1 >= 0;
 		}
 		
 		public canNext() {
-			return this.currentIndex + 1 >= this.tracks.length;
+			return this.currentIndex + 1 < this.tracks.length;
 		}
 		
 		// playback info
@@ -140,7 +181,10 @@ module relisten {
 	}
 	
 	let _agAudioPlayer = new AGAudioPlayer();
-	export function AGAudioPlayerFactory() {
+	export function AGAudioPlayerFactory(IguanaAPI: IguanaAPI) {
+		_agAudioPlayer.IguanaAPI = IguanaAPI;
 		return _agAudioPlayer;
 	}
+	
+	AGAudioPlayerFactory.$inject = ['IguanaAPI'];
 }

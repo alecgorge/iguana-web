@@ -7,6 +7,7 @@ module relisten {
 	
 	export interface IQueueScope extends ng.IScope {
 		audioPlayer : AGAudioPlayer;
+		sortableOptions: Object;
 	}
 
 	export class QueueController {
@@ -24,6 +25,12 @@ module relisten {
 			private AGAudioPlayer: AGAudioPlayer
 		) {
 			this.$scope.audioPlayer = AGAudioPlayer;
+			
+			this.$scope.sortableOptions = {
+				stop: (e: any, ui: any) => {
+					this.$scope.audioPlayer.fixCurrentIndex()
+				}
+			}
 		}
 	}
 }

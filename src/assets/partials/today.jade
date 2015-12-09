@@ -1,0 +1,32 @@
+.row(ng-if="$root.currentArtist")
+	.col-xs-12
+		h1 Today in {{$root.currentArtist.name}}'s History
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li
+				a(href="/{{$root.currentArtist.slug}}") {{$root.currentArtist.name}}
+			li.active Today
+
+		ul
+			li(ng-repeat="show in current_artist.shows")
+				a(href="/{{current_artist.slug}}/{{show.year}}/{{show.month}}/{{show.day}}") {{show.title}}
+.row
+	.col-xs-12
+		h1 Today in History
+
+		ol.breadcrumb
+			li.active Today
+
+		div
+			.panel.panel-default.tih-panel(ng-repeat="artist in today_artists")
+				.panel-heading
+					h3.panel-title
+						a(href="/{{artist.slug}}") {{artist.name}}
+				
+				.panel-body
+					ul
+						li(ng-repeat="show in artist.shows")
+							a(href="/{{artist.slug}}/{{show.year}}/{{show.month}}/{{show.day}}") {{show.title}}
+		br.clear

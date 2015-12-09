@@ -144,6 +144,43 @@ module relisten {
 		data: T;
 	}
 	
+	export interface IguanaTIHArtist {
+		name: string;
+		slug: string;
+		shows: IguanaTIHShow[];
+	}
+	
+	export interface IguanaTIHShow {
+		id: number;
+		title: string;
+		display_date: string;
+		ArtistId: number;
+		year: number;
+		month: string;
+		day: string;
+	}
+	
+	export interface IguanaTIHContainer<T> {
+		tih: T[];
+	}
+	
+	export interface IguanaLiveContainer {
+		plays: IguanaLivePlay[];
+		now: number;
+	}
+	
+	export interface IguanaLivePlay {
+		title: string;
+		slug: string;
+		band: string;
+		year: string;
+		month: string;
+		day: string;
+		showVersion: string;
+		id: string;
+		bandName: string;
+	}
+	
 	export class IguanaAPI {
 		public static $inject = [
 			'$http',
@@ -188,6 +225,30 @@ module relisten {
 		
 		public topShows(artistSlug: string) : ng.IHttpPromise<IguanaContainer<Show[]>> {
 			return this.$http.get(this.artistRoute(artistSlug, 'top_shows'));
+		}
+		
+		public poll() : ng.IHttpPromise<IguanaLiveContainer> {
+			return this.$http.get(this.route('poll') + '?now=' + (new Date().getTime()));
+		}
+		
+		public post(track : PlaybackTrack) : void {
+			let song = <IguanaLivePlay> {
+				title: track.title,
+				slug: track.slug,
+				band: track.artist.slug,
+				year: ""+track.recording.year,
+				month: track.recording.display_date.substr(5,2),
+				day: track.recording.display_date.substr(8,2),
+				showVersion: "0",
+				id: ""+track.id,
+				bandName: track.artist.name
+			};
+			
+			this.$http.post(this.route('play'), { song: song});
+		}
+		
+		public today() : ng.IHttpPromise<IguanaTIHContainer<IguanaTIHArtist>> {
+			return this.$http.get(this.route('today'));
 		}
 		
 		public venues(artistSlug: string) : ng.IHttpPromise<IguanaContainer<PartialVenue[]>> {

@@ -50,10 +50,18 @@ module relisten {
 			let parts = $routeParams.datesource.split('-');
 			let day = parts[0];
 			let sourceIndex = parts.length > 1 ? parseInt(parts[1]) : 0;
-			let date = `${$routeParams.year}-${$routeParams.month}-${day}`
+			
+			let paddedMonth = ("00" + $routeParams.month).substring($routeParams.month.length);
+			let paddedDay = ("00" + day).substring(day.length);
+			
+			let date = `${$routeParams.year}-${paddedMonth}-${paddedDay}`
 			IguanaAPI.show($routeParams.artist, $routeParams.year, date).success(show => {
 				this.$scope.shows = show.data;
 				this.changeSource(sourceIndex);
+				
+				if(sourceIndex >= 3) {
+					this.$scope.show_all_sources = true;
+				}
 				
 				if($routeParams.trackSlug) {
 					this.playTrackAtIndex(this.$scope.current_show.tracks.map(track => {

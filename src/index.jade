@@ -14,8 +14,8 @@ html(lang='en', ng-app="relisten")
     title Relisten
     
     // build:css assets/app.css 
-    // link(rel='stylesheet', type='text/css', href='/assets/components/bootstrap/dist/css/bootstrap.css')
-    link(rel='stylesheet', type='text/css', href='https://bootswatch.com/yeti/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/assets/components/bootstrap/dist/css/bootstrap.css')
+    // link(rel='stylesheet', type='text/css', href='https://bootswatch.com/yeti/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='/assets/css/app.css')
     // endbuild 
     
@@ -46,9 +46,9 @@ html(lang='en', ng-app="relisten")
               input.form-control(type='text', placeholder='Search')
           ul.nav.navbar-nav.navbar-right
             li
-              a(href='#') Live
+              a(href='/live') Live
             li
-              a(href='#') Today
+              a(href='/today') Today
             li
               a(href='#') About
 
@@ -64,6 +64,7 @@ html(lang='en', ng-app="relisten")
       
     // build:js assets/app.js 
     script(src='/assets/components/jquery/dist/jquery.js')
+    script(src='/assets/components/jquery-ui/jquery-ui.js')
     script(src='/assets/components/moment/moment.js')
     script(src='/assets/components/angular/angular.js')
     script(src='/assets/components/angular-resource/angular-resource.js')
@@ -71,6 +72,7 @@ html(lang='en', ng-app="relisten")
     script(src='/assets/components/angular-route/angular-route.js')
     script(src='/assets/components/angular-sanitize/angular-sanitize.js')
     script(src='/assets/components/angular-bootstrap/ui-bootstrap.js')
+    script(src='/assets/components/angular-ui-sortable/sortable.js')
 
     script(src='/assets/js/Application.js')
     // endbuild 

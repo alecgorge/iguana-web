@@ -5,15 +5,22 @@
 		ol.breadcrumb
 			li.active Playback Queue
 		
-		table.table.table-striped.table-hover
+		table.table.table-hover
 			thead
 				th #
 				th Title
 				th Length 
-			tbody
-				tr(ng-repeat="track in audioPlayer.tracks")
-					td {{$index}}
-					td.nopadding
-						a(href='/{{track.artist.slug}}/{{track.recording.year}}/{{track.recording.display_date | limitTo:2:5}}/{{track.recording.display_date | limitTo:2:8}}').no-follow.block {{track.title}}  
-							small &mdash; {{track.recording.display_date}}
+			tbody(ui-sortable="sortableOptions", ng-model="audioPlayer.tracks")
+				tr(ng-repeat="track in audioPlayer.tracks", style="cursor: move;")
+					td(width="40")
+						span(ng-if="audioPlayer.audioTag.src != track.file") {{$index + 1}}
+						span(ng-if="audioPlayer.audioTag.src == track.file")
+							img(src="/assets/img/716.gif")
+					td
+						span
+							a(href='javascript:;').no-follow.block {{track.title}}  
+							small 
+								a(href='/{{track.artist.slug}}') {{track.artist.name}}
+								|  &mdash; 
+								a(href='/{{track.artist.slug}}/{{track.recording.year}}/{{track.recording.display_date | limitTo:2:5}}/{{track.recording.display_date | limitTo:2:8}}') {{track.recording.display_date}}
 					td {{track.length | humanizeDuration:true}}

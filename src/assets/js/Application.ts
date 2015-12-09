@@ -6,7 +6,9 @@
 /// <reference path='Controllers/VenueController.ts' />
 /// <reference path='Controllers/TopController.ts' />
 /// <reference path='Controllers/VenuesController.ts' />
+/// <reference path='Controllers/TodayController.ts' />
 /// <reference path='Controllers/QueueController.ts' />
+/// <reference path='Controllers/LiveController.ts' />
 /// <reference path='Services/IguanaAPI.ts' />
 /// <reference path='Services/AGAudioPlayer.ts' />
 /// <reference path='Filters/RelistenFilters.ts' />
@@ -52,6 +54,16 @@ module relisten {
 			.when('/queue', {
 				controller: QueueController,
 				templateUrl: '/assets/partials/queue.html',
+				controllerAs: 'vm'
+			})
+			.when('/today', {
+				controller: TodayController,
+				templateUrl: '/assets/partials/today.html',
+				controllerAs: 'vm'
+			})
+			.when('/live', {
+				controller: LiveController,
+				templateUrl: '/assets/partials/live.html',
 				controllerAs: 'vm'
 			})
 			.when('/:artist', {
@@ -144,6 +156,7 @@ module relisten {
 			'ngResource',
 			'ngSanitize',
 			'ui.bootstrap',
+			'ui.sortable',
 			'angularMoment'
 		])
             	.service('IguanaAPI', IguanaAPI)

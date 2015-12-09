@@ -1,26 +1,41 @@
-.row(ng-controller="PlaybackController")
-	.col-xs-2.center
-		.btn-group
-			button(type="button", ng-click="audioPlayer.previous()").btn.btn-default
-				i.glyphicon.glyphicon-backward
-			button(type="button", ng-show="audioTag.paused", ng-click="audioPlayer.play()").btn.btn-default
-				i.glyphicon.glyphicon-play
-			button(type="button", ng-show="!audioTag.paused", ng-click="audioPlayer.pause()").btn.btn-default
-				i.glyphicon.glyphicon-pause
-			button(type="button", ng-click="audioPlayer.next()").btn.btn-default
-				i.glyphicon.glyphicon-forward
-	.col-xs-7.center
-		.btn-group.player
-			.btn.endcap {{audioTag.currentTime | humanizeDuration:true }}
-			.btn.filler
-				input(type="range", min="0", max="{{audioTag.duration}}", step=".25", value="{{audioTag.currentTime}}")
-			.btn.endcap {{audioTag.duration | humanizeDuration:true }}
-	.col-xs-3.center
-		.btn-group
-			a(href="/queue").btn.btn-default.small-caps queue
-			button(type="button").btn.btn-default
-				// i.glyphicon.glyphicon-volume-off
-				i.glyphicon.glyphicon-volume-down
-				// i.glyphicon.glyphicon-volume-up
-			.btn.btn-default.no-hover
-				input(type="range", min="0", max="1", step="0.01", ng-model="audioTag.volume")
+div(ng-controller="PlaybackController")
+	.row(ng-show="audioPlayer.currentTrack")
+		.col-xs-12.center
+			p
+				strong {{audioPlayer.currentTrack.title}}
+				|  &mdash; 
+				a(href="/{{audioPlayer.currentTrack.artist.slug}}")
+					em {{audioPlayer.currentTrack.artist.name}}
+				|  &mdash; 
+				a(href='/{{audioPlayer.currentTrack.artist.slug}}/{{audioPlayer.currentTrack.recording.year}}/{{audioPlayer.currentTrack.recording.display_date | limitTo:2:5}}/{{audioPlayer.currentTrack.recording.display_date | limitTo:2:8}}')
+					| {{audioPlayer.currentTrack.recording.display_date}}
+				|  &mdash;
+				a(href='/{{audioPlayer.currentTrack.artist.slug}}/venues/{{audioPlayer.currentTrack.recording.venue.id}}')
+					| {{audioPlayer.currentTrack.recording.venue.name}}, {{audioPlayer.currentTrack.recording.venue.city}}
+				
+	.row
+		.col-xs-2.center
+			.btn-group
+				button(type="button", ng-click="audioPlayer.previous()").btn.btn-default
+					i.glyphicon.glyphicon-backward
+				button(type="button", ng-show="audioTag.paused", ng-click="audioPlayer.play()").btn.btn-default
+					i.glyphicon.glyphicon-play
+				button(type="button", ng-show="!audioTag.paused", ng-click="audioPlayer.pause()").btn.btn-default
+					i.glyphicon.glyphicon-pause
+				button(type="button", ng-click="audioPlayer.next()").btn.btn-default
+					i.glyphicon.glyphicon-forward
+		.col-xs-7.center
+			.btn-group.player
+				.btn.endcap {{audioTag.currentTime | humanizeDuration:true }}
+				.btn.filler
+					input(type="range", min="0", max="{{audioTag.duration}}", step=".25", ng-model="audioTag.currentTime")
+				.btn.endcap {{audioTag.duration | humanizeDuration:true }}
+		.col-xs-3.center
+			.btn-group
+				a(href="/queue").btn.btn-default.small-caps queue
+				button(type="button").btn.btn-default
+					// i.glyphicon.glyphicon-volume-off
+					i.glyphicon.glyphicon-volume-down
+					// i.glyphicon.glyphicon-volume-up
+				.btn.btn-default.no-hover
+					input(type="range", min="0", max="1", step="0.01", ng-model="audioTag.volume")

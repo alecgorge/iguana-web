@@ -8,6 +8,7 @@ module relisten {
 	export interface IQueueScope extends ng.IScope {
 		audioPlayer : AGAudioPlayer;
 		sortableOptions: Object;
+		events: QueueController;
 	}
 
 	export class QueueController {
@@ -25,12 +26,35 @@ module relisten {
 			private AGAudioPlayer: AGAudioPlayer
 		) {
 			this.$scope.audioPlayer = AGAudioPlayer;
+			this.$scope.events = this;
 			
 			this.$scope.sortableOptions = {
 				stop: (e: any, ui: any) => {
 					this.$scope.audioPlayer.fixCurrentIndex()
 				}
 			}
+		}
+		
+		public playTrackAtIndex(trackIdx: number) {
+			this.AGAudioPlayer.playAtIndex(trackIdx);
+		}
+		
+		public playNext(idx: number) {
+			let t = this.AGAudioPlayer.tracks[idx];
+			this.AGAudioPlayer.playNext(t, t.recording, t.artist);
+		}
+		
+		public addToQueue(idx: number) {
+			let t = this.AGAudioPlayer.tracks[idx];
+			this.AGAudioPlayer.addTracksFromRecordingAndArtist(
+				[t],
+				t.recording,
+				t.artist
+			);			
+		}
+		
+		public removeQueueItem(idx: number) {
+			this.AGAudioPlayer.removeTrackAtIndex(idx);
 		}
 	}
 }

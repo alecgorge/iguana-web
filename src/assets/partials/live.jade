@@ -8,6 +8,6 @@
 		p(ng-repeat="show in live")
 			a(href="/{{show.band}}/{{show.year}}/{{show.month}}/{{show.day}}-{{show.showVersion}}/{{show.slug}}") {{show.title}}
 			|  from 
-			a(href="/{{show.slug}}/{{show.year}}/{{show.month}}/{{show.day}}-{{show.showVersion}}") {{show.year}}/{{show.month}}/{{show.day}}
+			a(href="/{{show.band}}/{{show.year}}/{{show.month}}/{{show.day}}-{{show.showVersion}}") {{show.year}}/{{show.month}}/{{show.day}}
 			|  by 
 			a(href="/{{show.band}}") {{show.bandName}}

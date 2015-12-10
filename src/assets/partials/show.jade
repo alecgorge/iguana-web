@@ -62,12 +62,28 @@
 				th Length
 			tbody
 				tr(ng-repeat="track in current_show.tracks")
-					td(data-value="{{track.track}}") {{track.track}}
+					td(width="40", data-value="{{track.track}}")
+						span(ng-if="audioPlayer.audioTag.src != track.file") {{track.track}}
+						span(ng-if="audioPlayer.audioTag.src == track.file")
+							img(src="/assets/img/716.gif")
 					td(data-value="{{track.title}}").nopadding
 						// /{{$root.currentArtist.slug}}/{{current_show.year}}/{{current_show.display_date | limitTo:2:5}}/{{current_show.display_date | limitTo:2:8}}-{{current_show_index}}/{{track.slug}}
 						a(href='', ng-click="events.playTrackAtIndex($index)").no-follow.block {{track.title}}
 					td(data-value="{{track.length}}") {{track.length | humanizeDuration:true}}
-
+					td
+						.btn-group(uib-dropdown)
+							button.btn.btn-default.btn-xs.dropdown-toggle(uib-dropdown-toggle, type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								| Play 
+								span.caret
+							ul.uib-dropdown-menu
+								li
+									a(href="javascript:;", ng-click="events.playTrackAtIndex($index)") Play Now
+								li
+									a(href="javascript:;", ng-click="events.playNext($index)") Play Next
+								li
+									a(href="javascript:;", ng-click="events.addToQueue($index)") Add to Queue
+								li
+									a(href="javascript:;", ng-click="events.addToQueue($index)") Add Rest of Show to Queue
 		.review-container
 			h3 Reviews
 			p.lead(ng-show="current_show.reviews.length != 0") {{current_show.average_rating | round:2}} ({{current_show.reviews_count}} reviews)

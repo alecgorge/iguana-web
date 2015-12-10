@@ -32,7 +32,7 @@ module relisten {
 			
 			$interval(() => {
 				this.poll();
-			}, 5000);
+			}, 10000);
 		}
 		
 		private ids: string[] = [];

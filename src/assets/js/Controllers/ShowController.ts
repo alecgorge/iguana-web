@@ -13,6 +13,8 @@ module relisten {
 		events: ShowController;
 		
 		show_all_sources: boolean;
+		
+		audioPlayer: AGAudioPlayer;
 	}
 
 	export interface IShowRouteParams extends ng.route.IRouteParamsService {
@@ -46,6 +48,7 @@ module relisten {
 			$rootScope.setCurrentArtist($routeParams.artist);
 			$scope.show_all_sources = false;
 			$scope.events = this;
+			$scope.audioPlayer = AGAudioPlayer;
 			
 			let parts = $routeParams.datesource.split('-');
 			let day = parts[0];
@@ -78,7 +81,7 @@ module relisten {
 		
 		public playTrackAtIndex(trackIdx: number) {
 			let tracks: Track[] = [];
-			for(var i = trackIdx; i < this.$scope.current_show.tracks.length; i++) {
+			for(var i = 0; i < this.$scope.current_show.tracks.length; i++) {
 				tracks.push(this.$scope.current_show.tracks[i]);
 			}
 			
@@ -88,7 +91,34 @@ module relisten {
 				this.$scope.current_show,
 				this.$rootScope.currentArtist
 			);
-			this.AGAudioPlayer.playAtIndex(0);
+			this.AGAudioPlayer.playAtIndex(trackIdx);
+		}
+		
+		public playNext(idx: number) {
+			let t = this.$scope.current_show.tracks[idx];
+			this.AGAudioPlayer.playNext(t, this.$scope.current_show, this.$rootScope.currentArtist);
+		}
+		
+		public addToQueue(idx: number) {
+			let t = this.$scope.current_show.tracks[idx];
+			this.AGAudioPlayer.addTracksFromRecordingAndArtist(
+				[t],
+				this.$scope.current_show,
+				this.$rootScope.currentArtist
+			);			
+		}
+		
+		public addRestOfShowToQueue(idx: number) {
+			let tracks: Track[] = [];
+			for(var i = idx; i < this.$scope.current_show.tracks.length; i++) {
+				tracks.push(this.$scope.current_show.tracks[i]);
+			}
+			
+			this.AGAudioPlayer.addTracksFromRecordingAndArtist(
+				tracks,
+				this.$scope.current_show,
+				this.$rootScope.currentArtist
+			);
 		}
 	}
 }

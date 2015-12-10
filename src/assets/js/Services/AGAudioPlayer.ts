@@ -76,7 +76,7 @@ module relisten {
 		
 		public addTracksFromRecordingAndArtist(t: Track[], rec: Recording, artist: Artist) {
 			this.addPlaybackTracks(t.map(v => {
-				let pt = <PlaybackTrack>v;
+				let pt = <PlaybackTrack>jQuery.extend(true, {}, v);
 				pt.artist = artist;
 				
 				pt.recording = jQuery.extend(true, {}, rec);
@@ -86,8 +86,25 @@ module relisten {
 			this.saveQueue();
 		}
 		
+		public playNext(t: Track, rec: Recording, artist: Artist) {
+			let pt = <PlaybackTrack>jQuery.extend(true, {}, t);
+			pt.artist = artist;
+			
+			pt.recording = jQuery.extend(true, {}, rec);
+			
+			this.tracks.splice(this.currentIndex + 1, 0, pt);
+
+			this.saveQueue();
+		}
+		
 		public removeTrackAtIndex(idx: number) {
 			this.tracks.splice(idx, 1);
+			
+			// move to next item
+			if(idx == this.currentIndex) {
+				this.playAtIndex(idx);
+			}
+			
 			this.saveQueue();
 		}
 		

@@ -10,9 +10,10 @@ var gulp = require('gulp'),
     path = require('path')
     image = require('gulp-image'),
     useref = require('gulp-useref'),
-    gulp_if = require('gulp-if'),
-    lazypipe = require('lazypipe'),
-    minifyCss = require('gulp-minify-css')
+    csso = require('gulp-csso'),
+    rev = require('gulp-rev'),
+    revReplace = require('gulp-rev-replace'),
+    filter = require('gulp-filter')
     ;
 
 // --- Basic Tasks ---
@@ -74,17 +75,51 @@ gulp.task('watch', ['js', 'image', 'css', 'templates', 'express'], function() {
     gulp.watch('src/assets/partials/*.jade', ['templates']);
 });
 
-gulp.task('build', ['js', 'image', 'css', 'templates'], function () {
-    var assets = useref.assets({}, lazypipe().pipe(sourcemaps.init, { loadMaps: true }));
-    return gulp.src('dist/**/*.html')
-        .pipe(assets)
-        .pipe(gulp_if('**/*.js', uglify()))
-        .pipe(gulp_if('**/*.css', minifyCss()))
-        .pipe(sourcemaps.write('maps'))
-        .pipe(assets.restore())
+gulp.task('build', ['js', 'image', 'css', 'templates', 'templates'], function () {
+    var jsFilter = filter("**/*.js", {restore: true});
+    var cssFilter = filter("**/*.css", {restore: true});
+    
+    var userefAssets = useref.assets();
+    
+    return gulp.src("dist/index.html")
+        .pipe(userefAssets)      // Concatenate with gulp-useref
+
+        .pipe(jsFilter)
+        .pipe(sourcemaps.init())
+        .pipe(uglify())             // Minify any javascript sources
+        .pipe(rev())                // Rename the concatenated files
+        .pipe(sourcemaps.write('./'))
+        .pipe(jsFilter.restore)
+
+        .pipe(cssFilter)
+        .pipe(sourcemaps.init())
+        .pipe(csso())               // Minify any CSS sources
+        .pipe(rev())                // Rename the concatenated files
+        .pipe(sourcemaps.write('./'))
+        .pipe(cssFilter.restore)
+
+        .pipe(userefAssets.restore())
         .pipe(useref())
-        .pipe(gulp.dest('www'))
+
+        .pipe(revReplace())         // Substitute in new filenames
+
+        .pipe(gulp.dest('www'));
 });
+
+gulp.task('_www', ['build'], function () {
+    return gulp.src([
+        "./dist/assets/partials/**/*.html",
+        "./dist/assets/img/**/*",
+    ], { base: './dist' })
+        .pipe(gulp.dest('www/'));
+});
+
+gulp.task('www', ['_www'], function () {
+    return gulp.src([
+        './dist/assets/components/bootstrap/fonts/**/*'
+    ], { base: './dist/assets/components/bootstrap' })
+        .pipe(gulp.dest('www/'));
+})
 
 // Default Task
 gulp.task('default', ['js', 'image', 'css', 'templates', 'express']);

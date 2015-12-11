@@ -1,0 +1,49 @@
+
+<h3>Properties<a href="#/properties/create" class="btn btn-primary pull-right">Create New Property</a></h3><br/>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="list-group"><a ng-repeat="property in properties" href="#/properties/{{property._id}}" ng-class="{active: currentProperty._id == property._id}" class="list-group-item">
+        <h4 class="list-group-item-heading">{{ property.address }}</h4>
+        <p class="list-group-item-text"><span ng-if="events.currentUserHasNotificationsEnableForProperty($index)" class="label label-success">Notifications on</span><span ng-if="!events.currentUserHasNotificationsEnableForProperty($index)" class="label label-default">Notifications off</span> <span class="label label-default">{{ property.names.length }} homeowners</span></p></a></div>
+  </div>
+  <div class="col-xs-6">
+    <form ng-show="currentProperty != null" ng-submit="events.save()" class="device-details">
+      <h3>{{ currentProperty.address }}</h3><br/>
+      <div class="form-group">
+        <label for="address" class="control-label">Address</label>
+        <input id="address" name="address" type="text" ng-model="currentProperty.address" class="form-control"/>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input id="push" name="push" type="checkbox" ng-model="currentPropertyPushNotificationsEnabled"/> <strong>Push Notifications</strong>
+        </label>
+        <p class="help-text">
+          This enables or disables push notifications being sent to your mobile device. This doesn't
+          affect homeowners' settings.
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="push" class="control-label">Homeowners</label>
+        <div class="row">
+          <div class="col-sm-6">
+            <div ng-repeat="name in currentProperty.names track by $index" class="spaced">
+              <div class="input-group">
+                <div class="input-group-btn"><a href="" ng-click="events.removeHomeowner($index)" class="btn">&times;</a></div>
+                <input name="push[{{$index}}]" type="text" ng-model="currentProperty.names[$index]" class="form-control"/>
+              </div>
+            </div><a href="" ng-click="events.addHomeowner()" class="btn">+ Add Homeowner</a>
+          </div>
+          <div class="col-sm-6">
+            <div ng-repeat="ph in currentProperty.phoneNumbers track by $index" class="spaced">
+              <input name="push[{{$index}}]" type="tel" skip-util-script-download="skip-util-script-download" international-phone-number="international-phone-number" only-countries="us" ng-model="currentProperty.phoneNumbers[$index]" class="form-control"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="submit" ng-show="!submitting" class="btn btn-primary pull-right">Save</button>
+        <button type="submit" ng-show="submitting" disabled="disabled" class="btn btn-primary pull-right">Saving...</button>
+      </div>
+    </form>
+  </div>
+</div>

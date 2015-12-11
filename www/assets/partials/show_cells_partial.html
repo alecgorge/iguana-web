@@ -1,0 +1,9 @@
+
+<td data-value="{{show.is_soundboard}}" width="55"><span ng-show="show.is_soundboard" class="label label-success">SBD</span></td>
+<td data-value="{{show.date}}" class="nopadding min-width-160"><a href="/{{$root.currentArtist.slug}}/{{show.year}}/{{show.display_date | limitTo:2:5}}/{{show.display_date | limitTo:2:8}}" class="block">{{show.display_date}}</a></td>
+<td ng-if="show.track_count" data-value="{{show.track_count}}">{{show.track_count}}</td>
+<td ng-if="!show.track_count" data-value="{{show.recording_count}}">{{show.recording_count}}</td>
+<td data-value="{{show.duration}}">{{show.duration | humanizeDuration:true}}</td>
+<td data-value="{{show.average_rating}}">{{show.average_rating}}</td>
+<td data-value="{{show.reviews_count}}">{{show.reviews_count}}</td>
+<td data-value="{{show.venue_name}}" class="nopadding"><a href="/{{$root.currentArtist.slug}}/venues/{{show.VenueId}}" class="block">{{show.venue_name}}, {{show.venue_city}}</a></td>

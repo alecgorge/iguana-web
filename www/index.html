@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="relisten">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base href="/">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/assets/img/favicon.ico">
+    <title>Relisten</title>
+    <link rel="stylesheet" href="assets/app-48d0c77567.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries-->
+    <!--if lt IE 9
+    script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+    script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+        
+    -->
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="collapse navbar-collapse">
+          <div class="navbar-header"><a href="/" class="navbar-brand"><img alt="Relisten" src="/assets/img/relisten-circular-logo.png" style="margin-top: -5px"></a><a href="/" class="navbar-brand">All Artists</a></div>
+          <ul class="nav navbar-nav">
+            <li ng-show="$root.currentArtist" class="active"><a href="/{{$root.currentArtist.slug}}">{{$root.currentArtist.name}} </a></li>
+            <li ng-show="$root.currentArtist"><a href="/{{$root.currentArtist.slug}}">Years</a></li>
+            <li ng-show="$root.currentArtist"><a href="/{{$root.currentArtist.slug}}/venues">Venues</a></li>
+            <li ng-show="$root.currentArtist"><a href="/{{$root.currentArtist.slug}}/top">Top Shows</a></li>
+          </ul>
+          <form role="search" class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Search" class="form-control">
+            </div>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/live">Live</a></li>
+            <li><a href="/today">Today</a></li>
+            <li><a href="#">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <section id="content" ng-view></section>
+      <footer class="footer">
+        <p>© Alec Gorge 2015</p>
+      </footer>
+    </div>
+    <nav id="playbar" class="navbar navbar-default navbar-fixed-bottom">
+      <div class="container">
+        <div ng-controller="PlaybackController">
+          <div ng-show="audioPlayer.currentTrack" class="row">
+            <div class="col-xs-12 center">
+              <p><strong>{{audioPlayer.currentTrack.title}}</strong> &mdash; <a href="/{{audioPlayer.currentTrack.artist.slug}}"><em>{{audioPlayer.currentTrack.artist.name}}</em></a> &mdash; <a href="/{{audioPlayer.currentTrack.artist.slug}}/{{audioPlayer.currentTrack.recording.year}}/{{audioPlayer.currentTrack.recording.display_date | limitTo:2:5}}/{{audioPlayer.currentTrack.recording.display_date | limitTo:2:8}}">{{audioPlayer.currentTrack.recording.display_date}}</a> &mdash;<a href="/{{audioPlayer.currentTrack.artist.slug}}/venues/{{audioPlayer.currentTrack.recording.venue.id}}">{{audioPlayer.currentTrack.recording.venue.name}}, {{audioPlayer.currentTrack.recording.venue.city}}</a></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-2 center">
+              <div class="btn-group">
+                <button type="button" ng-click="audioPlayer.previous()" class="btn btn-default"><i class="glyphicon glyphicon-backward"></i></button>
+                <button type="button" ng-show="audioTag.paused" ng-click="audioPlayer.play()" class="btn btn-default"><i class="glyphicon glyphicon-play"></i></button>
+                <button type="button" ng-show="!audioTag.paused" ng-click="audioPlayer.pause()" class="btn btn-default"><i class="glyphicon glyphicon-pause"></i></button>
+                <button type="button" ng-click="audioPlayer.next()" class="btn btn-default"><i class="glyphicon glyphicon-forward"></i></button>
+              </div>
+            </div>
+            <div class="col-xs-7 center">
+              <div class="btn-group player">
+                <div class="btn endcap">{{audioTag.currentTime | humanizeDuration:true }}</div>
+                <div class="btn filler">
+                  <input type="range" min="0" max="{{audioTag.duration}}" step=".25" ng-model="audioTag.currentTime">
+                </div>
+                <div class="btn endcap">{{audioTag.duration | humanizeDuration:true }}</div>
+              </div>
+            </div>
+            <div class="col-xs-3 center">
+              <div class="btn-group"><a href="/queue" class="btn btn-default small-caps">queue</a>
+                <button type="button" class="btn btn-default">
+                  <!-- i.glyphicon.glyphicon-volume-off--><i class="glyphicon glyphicon-volume-down"></i>
+                  <!-- i.glyphicon.glyphicon-volume-up-->
+                </button>
+                <div class="btn btn-default no-hover">
+                  <input type="range" min="0" max="1" step="0.01" ng-model="audioTag.volume">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <script src="assets/app-e12cf964fb.js"></script>
+  </body>
+</html>

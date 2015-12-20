@@ -1,0 +1,11 @@
+.row
+	.col-xs-12
+		h1 {{$root.currentArtist.name}}'s Top Rated Shows
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li
+				a(href="/{{$root.currentArtist.slug}}") {{$root.currentArtist.name}}
+			li.active Top Shows
+		include ./top_partial.jade

@@ -1,0 +1,41 @@
+.row
+	.col-xs-12
+		h1 You have {{audioPlayer.tracks.length}} tracks in your playback queue
+
+		ol.breadcrumb
+			li.active Playback Queue
+		
+		table.table.table-hover
+			thead
+				th #
+				th Title
+				th Length
+				th 
+			tbody(ui-sortable="sortableOptions", ng-model="audioPlayer.tracks")
+				tr(ng-repeat="track in audioPlayer.tracks", style="cursor: move;")
+					td(width="40")
+						span(ng-if="audioPlayer.audioTag.src != track.file") {{$index + 1}}
+						span(ng-if="audioPlayer.audioTag.src == track.file")
+							img(src="/assets/img/716.gif")
+					td
+						span
+							a(href='javascript:;', ng-click="events.playTrackAtIndex($index)").no-follow.block {{track.title}}  
+							small 
+								a(href='/{{track.artist.slug}}') {{track.artist.name}}
+								|  &mdash; 
+								a(href='/{{track.artist.slug}}/{{track.recording.year}}/{{track.recording.display_date | limitTo:2:5}}/{{track.recording.display_date | limitTo:2:8}}') {{track.recording.display_date}}
+					td {{track.length | humanizeDuration:true}}
+					td(width="100")
+						.btn-group(uib-dropdown)
+							button.btn.btn-default.btn-xs.dropdown-toggle(uib-dropdown-toggle, type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								| Play 
+								span.caret
+							ul.uib-dropdown-menu
+								li
+									a(href="javascript:;", ng-click="events.playTrackAtIndex($index)") Play Now
+								li
+									a(href="javascript:;", ng-click="events.playNext($index)") Play Next
+								li
+									a(href="javascript:;", ng-click="events.addToQueue($index)") Add to Queue
+						button.btn.btn-default.btn-xs(ng-click="events.removeQueueItem($index)")
+							| &times;

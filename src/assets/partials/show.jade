@@ -1,0 +1,102 @@
+.row
+	.col-xs-12
+		h1 {{current_show.display_date}} 
+			small {{current_show.duration | humanizeDuration:true}} at 
+				a(href='/{{$root.currentArtist.slug}}/venues/{{current_show.venue.id}}') {{current_show.venue.name}}, {{current_show.venue.city}}
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li
+				a(href="/{{$root.currentArtist.slug}}") {{$root.currentArtist.name}}
+			li
+				a(href='/{{$root.currentArtist.slug}}/{{current_show.year}}') {{current_show.year}}
+			li.active {{current_show.display_date}} 
+.row
+	.col-xs-4
+		.block
+			h3(style='margin-top:0') {{shows.length}} Source(s)
+			ul.nav.nav-pills.nav-stacked#sources-menu
+				li(ng-repeat="show in shows", ng-class='{active: show.id==current_show.id}')
+					a(href='/{{$root.currentArtist.slug}}/{{show.year}}/{{show.display_date | limitTo:2:5}}/{{show.display_date | limitTo:2:8}}-{{$index}}', ng-click="events.changeSource($index)", ng-show="show_all_sources || $index < 3").no-follow
+						span.badge.pull-right {{show.average_rating | round:2}}/5.00 ({{show.reviews_count}})
+						small 
+							strong {{show.duration | humanizeDuration:true}}
+							|  &mdash; {{show.source}}
+			p.center
+				span(ng-show="shows.length > 3")
+					button(type="button", ng-click="show_all_sources = true", ng-show="!show_all_sources").btn.btn-default
+						| Show all sources
+					button(type="button", ng-click="show_all_sources = false", ng-show="show_all_sources").btn.btn-default
+						| Show top sources
+		.block(ng-show="current_show.description != ''")
+			.well.current_show-description
+				p.prewrap(ng-bind-html="current_show.description | linky:'_self':{rel: 'nofollow'}")
+
+		.block(ng-show="current_show.source != ''")
+			h3 Source
+			p {{current_show.source}}
+
+		.block(ng-show="current_show.lineage != ''")
+			h3 Lineage
+			p {{current_show.lineage}}
+
+		.block(ng-show="current_show.taper != ''")
+			h3 Taper
+			p {{current_show.taper}}
+		.block(ng-show="current_show.archive_identifier != ''")
+			h3 Links
+			ul.nav.nav-pills.nav-stacked
+				li
+					a(href='https://archive.org/details/{{current_show.archive_identifier}}') Complete show details on archive.org
+				li
+					a(href='https://archive.org/download/{{current_show.archive_identifier}}/{{current_show.archive_identifier}}_vbr_mp3.zip') VBR MP3 ZIP (via archive.org)
+				li
+					a(href='https://archive.org/details/{{current_show.archive_identifier}}/{{current_show.archive_identifier}}_vbr.m3u') VBR MP3 M3U Stream (via archive.org)
+
+	.col-xs-8
+		table.table.table-striped.table-hover.sortable
+			thead
+				th(data-defaultsort="asc") #
+				th Title
+				th Length
+			tbody
+				tr(ng-repeat="track in current_show.tracks")
+					td(width="40", data-value="{{track.track}}")
+						span(ng-if="audioPlayer.audioTag.src != track.file") {{track.track}}
+						span(ng-if="audioPlayer.audioTag.src == track.file")
+							img(src="/assets/img/716.gif")
+					td(data-value="{{track.title}}").nopadding
+						// /{{$root.currentArtist.slug}}/{{current_show.year}}/{{current_show.display_date | limitTo:2:5}}/{{current_show.display_date | limitTo:2:8}}-{{current_show_index}}/{{track.slug}}
+						a(href='', ng-click="events.playTrackAtIndex($index)").no-follow.block {{track.title}}
+					td(data-value="{{track.length}}") {{track.length | humanizeDuration:true}}
+					td
+						.btn-group(uib-dropdown)
+							button.btn.btn-default.btn-xs.dropdown-toggle(uib-dropdown-toggle, type='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
+								| Play 
+								span.caret
+							ul.uib-dropdown-menu
+								li
+									a(href="javascript:;", ng-click="events.playTrackAtIndex($index)") Play Now
+								li
+									a(href="javascript:;", ng-click="events.playNext($index)") Play Next
+								li
+									a(href="javascript:;", ng-click="events.addToQueue($index)") Add to Queue
+								li
+									a(href="javascript:;", ng-click="events.addToQueue($index)") Add Rest of Show to Queue
+		.review-container
+			h3 Reviews
+			p.lead(ng-show="current_show.reviews.length != 0") {{current_show.average_rating | round:2}} ({{current_show.reviews_count}} reviews)
+			p.lead.center
+				| Have thoughts about the show?
+				br
+				| You can leave a rating and review 
+				a(href="https://archive.org/write-review.php?identifier={{current_show.archive_identifier}}") on archive.org
+				| !
+			ul.reviews
+				li(ng-repeat="review in current_show.reviews")
+					h4 {{review.reviewtitle}}
+						small {{review.reviewdate}}
+					p Rated {{review.stars}}/5 stars by 
+						cite {{review.reviewer}}
+					blockquote.prewrap(ng-bind-html="review.reviewbody | linky:'_self':{rel: 'nofollow'}") 

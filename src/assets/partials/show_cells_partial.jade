@@ -1,0 +1,3 @@
+include ./show_cells_partial_without_venue.jade 
+td(data-value="{{show.venue_name}}").nopadding
+	a(href='/{{$root.currentArtist.slug}}/venues/{{show.VenueId}}').block {{show.venue_name}}, {{show.venue_city}}

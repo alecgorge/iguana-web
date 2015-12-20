@@ -1,0 +1,35 @@
+
+<div class="row">
+  <div class="col-xs-12">
+    <h1>You have {{audioPlayer.tracks.length}} tracks in your playback queue</h1>
+    <ol class="breadcrumb">
+      <li class="active">Playback Queue</li>
+    </ol>
+    <table class="table table-hover">
+      <thead>
+        <th>#</th>
+        <th>Title</th>
+        <th>Length</th>
+        <th> </th>
+      </thead>
+      <tbody ui-sortable="sortableOptions" ng-model="audioPlayer.tracks">
+        <tr ng-repeat="track in audioPlayer.tracks" style="cursor: move;">
+          <td width="40"><span ng-if="audioPlayer.audioTag.src != track.file">{{$index + 1}}</span><span ng-if="audioPlayer.audioTag.src == track.file"><img src="/assets/img/716.gif"/></span></td>
+          <td><span><a href="javascript:;" ng-click="events.playTrackAtIndex($index)" class="no-follow block">{{track.title}}  </a><small> <a href="/{{track.artist.slug}}">{{track.artist.name}}</a> &mdash; <a href="/{{track.artist.slug}}/{{track.recording.year}}/{{track.recording.display_date | limitTo:2:5}}/{{track.recording.display_date | limitTo:2:8}}">{{track.recording.display_date}}</a></small></span></td>
+          <td>{{track.length | humanizeDuration:true}}</td>
+          <td width="100">
+            <div uib-dropdown="uib-dropdown" class="btn-group">
+              <button uib-dropdown-toggle="uib-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-xs dropdown-toggle">Play <span class="caret"></span></button>
+              <ul class="uib-dropdown-menu">
+                <li><a href="javascript:;" ng-click="events.playTrackAtIndex($index)">Play Now</a></li>
+                <li><a href="javascript:;" ng-click="events.playNext($index)">Play Next</a></li>
+                <li><a href="javascript:;" ng-click="events.addToQueue($index)">Add to Queue</a></li>
+              </ul>
+            </div>
+            <button ng-click="events.removeQueueItem($index)" class="btn btn-default btn-xs">&times;</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

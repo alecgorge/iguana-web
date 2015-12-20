@@ -1,0 +1,30 @@
+.row
+	.col-xs-12
+		h1 {{years.length}} Years of {{$root.currentArtist.name}}
+
+		ol.breadcrumb
+			li
+				a(href="/") Artists
+			li.active {{$root.currentArtist.name}}
+		table.table.table-striped.table-hover.sortable
+			thead
+				th(data-defaultsort='asc') Year
+				th Shows
+				th Sources
+				th Duration
+				th Avg. Duration
+				th Avg. Rating
+			tbody
+				tr(ng-repeat="year in years")
+					td(data-value="{{year.year}}").nopadding.min-width-90
+						a(href='/{{$root.currentArtist.slug}}/{{year.year}}').block {{year.year}}
+					td {{year.show_count}}
+					td {{year.recording_count}}
+					td(data-value="{{year.duration}}") {{year.duration | humanizeDuration:true}}
+					td(data-value="{{year.avg_duration}}") {{year.avg_duration | humanizeDuration:true}}
+					td(data-value="{{year.avg_rating}}") {{year.avg_rating | round:2 }}
+
+.row
+	.col-xs-12
+		h1 {{$root.currentArtist.name}}'s Top Rated Shows
+		include ./top_partial.jade

@@ -1,0 +1,12 @@
+table.table.table-striped.table-hover.sortable
+	thead
+		th 
+		th(data-defaultsort='asc') Date
+		th Tracks
+		th Duration
+		th Avg. Rating
+		th Reviews
+		th Venue
+	tbody
+		tr(ng-repeat="show in top_shows")
+			include ./show_cells_partial.jade

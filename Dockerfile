@@ -10,6 +10,6 @@ RUN npm start
 
 COPY . /usr/src/app
 
-EXPOSE 9000
+EXPOSE 8080
 
 CMD ["npm", "run-script", "serve"]  

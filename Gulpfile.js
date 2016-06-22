@@ -79,10 +79,10 @@ gulp.task('build', ['js', 'image', 'css', 'templates', 'templates'], function ()
     var jsFilter = filter("**/*.js", {restore: true});
     var cssFilter = filter("**/*.css", {restore: true});
     
-    var userefAssets = useref.assets();
+    //var userefAssets = useref.assets();
     
     return gulp.src("dist/index.html")
-        .pipe(userefAssets)      // Concatenate with gulp-useref
+        //.pipe(userefAssets)      // Concatenate with gulp-useref
 
         .pipe(jsFilter)
         .pipe(sourcemaps.init())
@@ -98,7 +98,7 @@ gulp.task('build', ['js', 'image', 'css', 'templates', 'templates'], function ()
         .pipe(sourcemaps.write('./'))
         .pipe(cssFilter.restore)
 
-        .pipe(userefAssets.restore())
+        //.pipe(userefAssets.restore())
         .pipe(useref())
 
         .pipe(revReplace())         // Substitute in new filenames

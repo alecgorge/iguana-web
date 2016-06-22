@@ -31,3 +31,4 @@ node_modules
 !dist/assets/
 dist/*
 !dist/assets/components
+www/
